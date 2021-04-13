@@ -1,5 +1,10 @@
 package com.xxkun.client.component.transfer;
 
+import com.xxkun.client.component.exception.RequestConvertException;
+import com.xxkun.client.pojo.request.Request;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
@@ -25,4 +30,14 @@ public class LocalServer implements Transfer {
     }
 
 
+    @Override
+    public void send(Request request) {
+        try {
+            byte[] data = request.convertToByteArray();
+            DatagramPacket packet = new DatagramPacket(data, data.length);
+            server.send(packet);
+        } catch (RequestConvertException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

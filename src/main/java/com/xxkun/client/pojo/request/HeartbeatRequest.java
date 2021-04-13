@@ -26,7 +26,7 @@ public class HeartbeatRequest extends Request implements Message {
     }
 
     @Override
-    protected void overwriteToByteArray(BodyBuffer bodyBuffer) throws RequestConvertException {
+    protected void overwriteToByteArray(BodyBuffer bodyBuffer) {
         bodyBuffer.writeInt(getMessageType().getCode());
     }
 
