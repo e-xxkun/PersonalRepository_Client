@@ -34,8 +34,9 @@ public class LocalServer implements Transfer {
     public void send(Request request) {
         try {
             byte[] data = request.convertToByteArray();
-            DatagramPacket packet = new DatagramPacket(data, data.length);
+            DatagramPacket packet = new DatagramPacket(data, 0, data.length, request.getSocketAddress());
             server.send(packet);
+            System.out.println("SEND: to " + request.getSocketAddress());
         } catch (RequestConvertException | IOException e) {
             e.printStackTrace();
         }

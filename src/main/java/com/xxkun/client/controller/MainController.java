@@ -1,5 +1,6 @@
 package com.xxkun.client.controller;
 
+import com.xxkun.client.common.PersonalInfo;
 import com.xxkun.client.component.transfer.LocalServer;
 import com.xxkun.client.component.transfer.Transfer;
 import com.xxkun.client.pojo.request.HeartbeatRequest;
@@ -35,6 +36,7 @@ public class MainController {
 
     private final Transfer transfer;
     private InetSocketAddress socketAddress;
+    private PersonalInfo info;
 
     public MainController() {
         Transfer transferTmp;
@@ -45,7 +47,7 @@ public class MainController {
             e.printStackTrace();
         }
         transfer = transferTmp;
-        socketAddress = InetSocketAddress.createUnresolved("127.0.0.1", 8878);
+        socketAddress = new InetSocketAddress("127.0.0.1", 8876);
     }
 
 
@@ -58,6 +60,7 @@ public class MainController {
 
     public void heartbeat(ActionEvent actionEvent) {
         HeartbeatRequest request = new HeartbeatRequest(socketAddress);
+        request.setToken(heartbeatText.getCharacters().toString());
         transfer.send(request);
     }
 

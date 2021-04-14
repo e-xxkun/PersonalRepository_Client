@@ -17,7 +17,7 @@ public abstract class Request implements Delayed {
     private static final int HEAD = 0xFEFDDFEB;
 
 //    HEAD|sequence|clientVersion|cmdId|bodyLength  ->  int|long|int|int|int
-    private static final int HEAD_LEN = 3 * Integer.BYTES + Long.BYTES;
+    private static final int HEAD_LEN = 4 * Integer.BYTES + Long.BYTES;
 
     private long sequence;
 
@@ -37,7 +37,7 @@ public abstract class Request implements Delayed {
 
     public Request(InetSocketAddress socketAddress) {
         bodyBuffer = new BodyBuffer();
-        bodyBuffer.writeInt(HEAD);
+        bodyBuffer.byteBuffer.putInt(HEAD);
         setSocketAddress(socketAddress);
     }
 
@@ -172,7 +172,11 @@ public abstract class Request implements Delayed {
         }
 
         public void writeString(String value) {
-            for (int i = 0;i < value.length();i ++) {
+            writeString(value, value.length());
+        }
+
+        public void writeString(String value, int length) {
+            for (int i = 0;i < length;i ++) {
                 byteBuffer.putChar(value.charAt(i));
             }
         }
