@@ -2,7 +2,9 @@ package com.xxkun.client.component.handler;
 
 import com.xxkun.client.pojo.respone.ResponseMessage;
 
-public interface IMessageHandler {
+public abstract class IMessageHandler {
 
-    void consume(ResponseMessage message );
+    IMessageHandler[] handler = new IMessageHandler[1];
+
+    abstract void consume(ResponseMessage message);
 }

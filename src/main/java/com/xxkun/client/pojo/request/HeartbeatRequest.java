@@ -24,7 +24,7 @@ public class HeartbeatRequest extends Request implements Message {
 
     @Override
     public RequestType getType() {
-        return RequestType.PUT;
+        return RequestType.GET;
     }
 
     @Override
