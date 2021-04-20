@@ -1,12 +1,13 @@
 package com.xxkun.client.pojo.request;
 
+import com.xxkun.udptransfer.TransferPacket;
+
 import java.net.InetSocketAddress;
 
 public class AckRequest extends Request {
 
-    public AckRequest(InetSocketAddress socketAddress, long sequence) {
+    public AckRequest(InetSocketAddress socketAddress) {
         super(socketAddress);
-        setSequence(sequence);
     }
 
     @Override
@@ -20,6 +21,6 @@ public class AckRequest extends Request {
     }
 
     @Override
-    protected void overwriteToByteArray(BodyBuffer bodyBuffer) {
+    protected void overwrite(TransferPacket.BodyBuffer bodyBuffer) {
     }
 }
