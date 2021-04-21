@@ -42,4 +42,9 @@ public class LocalServer implements Transfer {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public TransferPacket receive() {
+        return null;
+    }
 }

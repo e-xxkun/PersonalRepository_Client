@@ -2,6 +2,7 @@ package com.xxkun.client.pojo.request;
 
 
 import com.xxkun.client.dao.Peer;
+import com.xxkun.udptransfer.TransferPacket;
 
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -53,7 +54,7 @@ public class PunchRequest extends Request {
     }
 
     @Override
-    protected void overwriteToByteArray(BodyBuffer bodyBuffer) {
+    protected void overwrite(TransferPacket.BodyBuffer bodyBuffer) {
         bodyLength = Integer.BYTES;
         bodyBuffer.skip(Integer.BYTES);
         int i = index;
