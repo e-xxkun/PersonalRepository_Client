@@ -56,15 +56,15 @@ public class PunchRequest extends Request {
     @Override
     protected void overwrite(TransferPacket.BodyBuffer bodyBuffer) {
         bodyLength = Integer.BYTES;
-        bodyBuffer.skip(Integer.BYTES);
+        bodyBuffer.position(getHeadLength() + Integer.BYTES);
         int i = index;
         for (;i < userInfos.size() && bodyLength < bodyBuffer.limit();i ++) {
             Peer info = userInfos.get(i);
-            bodyBuffer.writeLong(info.getUserId());
+            bodyBuffer.putLong(info.getUserId());
             bodyLength += Long.BYTES;
         }
-        bodyBuffer.position(0);
-        bodyBuffer.writeInt(i - index);
+        bodyBuffer.position(getHeadLength());
+        bodyBuffer.putInt(i - index);
         index = i;
     }
 }

@@ -36,6 +36,10 @@ public abstract class Request {
         return HEAD_LEN + getBodyLength();
     }
 
+    public int getHeadLength() {
+        return HEAD_LEN;
+    }
+
     public TransferPacket.BodyBuffer getBodyBuffer() {
         bodyBuffer.position(Integer.BYTES);
         overwrite(bodyBuffer);
