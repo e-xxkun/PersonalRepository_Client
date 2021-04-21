@@ -31,7 +31,6 @@ public class LocalServer implements Transfer {
         server = new TransferServer();
     }
 
-
     @Override
     public void send(Request request) {
         try {

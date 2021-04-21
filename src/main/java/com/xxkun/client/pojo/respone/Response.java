@@ -9,17 +9,7 @@ import java.util.Date;
 
 public final class Response {
 
-    public static final int UDP_MSG_MAX_LEN = 512;
-
-    private static final int MAX_RESEND_TIME = 4;
-
-    private static final int HEAD = 0xFEFDDFEB;
-
     private static final int HEAD_LEN = 4 * Integer.BYTES + Long.BYTES;
-
-    private final long sequence;
-
-    private Date receiveDate;
 
     private final InetSocketAddress socketAddress;
 
@@ -27,25 +17,11 @@ public final class Response {
 
     private final BodyBuffer bodyBuffer;
 
-    private Response(ByteBuffer buffer, Long seq, Integer cmdId, Integer bodyLength, InetSocketAddress socketAddress) {
+    private Response(ByteBuffer buffer, Integer cmdId, Integer bodyLength, InetSocketAddress socketAddress) {
         this.bodyBuffer = new BodyBuffer(buffer, bodyLength);
-        this.sequence = seq;
         this.socketAddress = socketAddress;
         this.type = ResponseType.valueOf(cmdId);
     }
-
-    public Date getReceiveDate() {
-        return receiveDate;
-    }
-
-    public void setReceiveDate(Date receiveDate) {
-        this.receiveDate = receiveDate;
-    }
-
-    public long getSequence() {
-        return sequence;
-    }
-
     public ResponseType getType() {
         return type;
     }
@@ -139,7 +115,6 @@ public final class Response {
     }
 
     public enum ResponseType {
-        ACK(0),
         REPLY(1),
         PUNCH(2),
         UNKNOWN(3);

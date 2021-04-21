@@ -60,7 +60,7 @@ public class MainController {
 
     public void heartbeat(ActionEvent actionEvent) {
         HeartbeatRequest request = new HeartbeatRequest(socketAddress);
-        request.setToken(heartbeatText.getCharacters().toString());
+        PersonalInfo.INSTANCE.setToken(heartbeatText.getCharacters().toString());
         transfer.send(request);
     }
 

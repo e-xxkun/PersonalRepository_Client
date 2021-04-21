@@ -3,7 +3,7 @@ package com.xxkun.client.common;
 import com.xxkun.client.pojo.NatType;
 import com.xxkun.client.pojo.UserStatus;
 
-public enum  PersonalInfo {
+public enum PersonalInfo {
     INSTANCE;
 
     public static final int TOKEN_LEN = 16;

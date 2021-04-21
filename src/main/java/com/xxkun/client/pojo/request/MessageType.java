@@ -1,16 +1,41 @@
 package com.xxkun.client.pojo.request;
 
-public enum MessageType {
-    PUNCH(0),
-    HEARTBEAT(1);
+public class MessageType {
 
-    private final int code;
+    public enum GET implements IMessageType {
+        PUNCH(0),
+        HEARTBEAT(1);
 
-    MessageType(int code) {
-        this.code = code;
+        private final int code;
+
+        GET(int code) {
+            this.code = code;
+        }
+        @Override
+        public int getCode() {
+            return code;
+        }
+        @Override
+        public Request.RequestType getRequestType() {
+            return Request.RequestType.GET;
+        }
     }
 
-    public int getCode() {
-        return code;
+    public enum PUT implements IMessageType {
+        ;
+
+        private final int code;
+
+        PUT(int code) {
+            this.code = code;
+        }
+        @Override
+        public int getCode() {
+            return code;
+        }
+        @Override
+        public Request.RequestType getRequestType() {
+            return Request.RequestType.PUT;
+        }
     }
 }

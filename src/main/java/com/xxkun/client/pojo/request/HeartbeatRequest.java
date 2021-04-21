@@ -6,41 +6,24 @@ import com.xxkun.udptransfer.TransferPacket;
 
 import java.net.InetSocketAddress;
 
-public class HeartbeatRequest extends Request implements Message {
-
-    private String token;
+public class HeartbeatRequest extends Request {
 
     public HeartbeatRequest(InetSocketAddress socketAddress) {
         super(socketAddress);
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     @Override
     public int getBodyLength() {
-        return Integer.BYTES + token.length() * Character.BYTES;
+        return 0;
     }
 
     @Override
-    public RequestType getType() {
-        return RequestType.GET;
-    }
-
-    @Override
-    public MessageType getMessageType() {
-        return MessageType.HEARTBEAT;
+    public IMessageType getMessageType() {
+        return MessageType.GET.HEARTBEAT;
     }
 
     @Override
     protected void overwrite(TransferPacket.BodyBuffer bodyBuffer) {
-//        bodyBuffer.position(0);
-//        bodyBuffer.writeInt(getMessageType().getCode());
-//        if (token.length() < PersonalInfo.TOKEN_LEN) {
-//            throw new RequestConvertException();
-//        }
-//        bodyBuffer.writeString(token, PersonalInfo.TOKEN_LEN);
     }
 
 }

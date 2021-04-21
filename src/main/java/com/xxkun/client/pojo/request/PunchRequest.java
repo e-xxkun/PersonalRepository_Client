@@ -1,6 +1,5 @@
 package com.xxkun.client.pojo.request;
 
-
 import com.xxkun.client.dao.Peer;
 import com.xxkun.udptransfer.TransferPacket;
 
@@ -49,8 +48,8 @@ public class PunchRequest extends Request {
     }
 
     @Override
-    public RequestType getType() {
-        return RequestType.GET;
+    public IMessageType getMessageType() {
+        return MessageType.GET.PUNCH;
     }
 
     @Override
