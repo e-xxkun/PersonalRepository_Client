@@ -13,13 +13,14 @@ public abstract class ResponseMessage {
         decode(response);
     }
 
+    public abstract IResponseType getResponseType();
     protected abstract void decode(Response response) throws MessageResolutionException;
 
     public static ResponseMessage decodeFromResponse(Response response) {
         TransferPacket.BodyBuffer buffer = response.getBodyBuffer();
         buffer.position(response.getHeadLength());
         int type = buffer.getInt();
-        IResponseType messageType = MessageFactory.fromTypeCode(type);
+        IResponseType messageType = (IResponseType) MessageFactory.fromTypeCode(type);
         if (messageType == null)
             return null;
         ResponseMessage message = null;

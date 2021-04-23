@@ -1,27 +1,24 @@
-package com.xxkun.client.pojo.respone.responsemessage;
+package com.xxkun.client.pojo.respone.message;
 
 import com.xxkun.client.component.exception.MessageResolutionException;
+import com.xxkun.client.pojo.respone.IResponseType;
+import com.xxkun.client.pojo.respone.MessageFactory;
 import com.xxkun.client.pojo.respone.Response;
-import com.xxkun.client.pojo.respone.ReplyResponseType;
+import com.xxkun.client.pojo.respone.ResponseMessage;
 
 import java.nio.BufferUnderflowException;
 
-public class HeartbeatMessage extends ReplyMessage {
+public class HeartbeatMessage extends ResponseMessage {
 
     private static final int MESSAGE_TOKEN_LEN = 8;
-    private String token;
 
     public HeartbeatMessage(Response response) throws MessageResolutionException {
         super(response);
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     @Override
-    public ReplyResponseType getType() {
-        return ReplyResponseType.UPDATE_TOKEN;
+    public IResponseType getResponseType() {
+        return MessageFactory.ResponseType.HEARTBEAT;
     }
 
     @Override

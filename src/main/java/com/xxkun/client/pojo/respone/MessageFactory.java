@@ -2,15 +2,13 @@ package com.xxkun.client.pojo.respone;
 
 import com.xxkun.client.component.exception.MessageResolutionException;
 
-import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MessageFactory {
 
-    private static Map<Integer, IResponseType> typeMap;
+    private static Map<Integer, IInnerMessageType> typeMap;
 
-    public static IResponseType fromTypeCode(int code) {
+    public static IInnerMessageType fromTypeCode(int code) {
         return typeMap.get(code);
     }
     
