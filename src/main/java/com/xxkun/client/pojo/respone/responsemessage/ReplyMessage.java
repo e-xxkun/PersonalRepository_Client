@@ -1,4 +1,4 @@
-package com.xxkun.client.pojo.respone.replymessage;
+package com.xxkun.client.pojo.respone.responsemessage;
 
 import com.xxkun.client.component.exception.MessageResolutionException;
 import com.xxkun.client.pojo.respone.Response;

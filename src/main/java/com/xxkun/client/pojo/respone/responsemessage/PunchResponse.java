@@ -1,7 +1,9 @@
-package com.xxkun.client.pojo.respone;
+package com.xxkun.client.pojo.respone.responsemessage;
 
 import com.xxkun.client.component.exception.MessageResolutionException;
 import com.xxkun.client.dao.Peer;
+import com.xxkun.client.pojo.respone.Response;
+import com.xxkun.client.pojo.respone.ResponseMessage;
 
 import java.nio.BufferUnderflowException;
 

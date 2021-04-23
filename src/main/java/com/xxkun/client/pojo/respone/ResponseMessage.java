@@ -1,9 +1,11 @@
 package com.xxkun.client.pojo.respone;
 
 import com.xxkun.client.component.exception.MessageResolutionException;
+import com.xxkun.udptransfer.TransferPacket;
 
 public abstract class ResponseMessage {
 
+    public static final int HEAD_LEN = Integer.BYTES;
     private final Response response;
 
     public ResponseMessage(Response response) throws MessageResolutionException {
@@ -14,34 +16,26 @@ public abstract class ResponseMessage {
     protected abstract void decode(Response response) throws MessageResolutionException;
 
     public static ResponseMessage decodeFromResponse(Response response) {
-        Response.BodyBuffer buffer = response.getBodyBuffer();
+        TransferPacket.BodyBuffer buffer = response.getBodyBuffer();
+        buffer.position(response.getHeadLength());
         int type = buffer.getInt();
-        IReplyResponseType messageType = IReplyResponseType.fromTypeCode(type);
+        IResponseType messageType = MessageFactory.fromTypeCode(type);
         if (messageType == null)
             return null;
         ResponseMessage message = null;
         try {
-            message = messageType.createReplyMessage(response);
+            message = messageType.createResponseMessage(response);
         } catch (MessageResolutionException e) {
             e.printStackTrace();
         }
         return message;
     }
 
+    public int getHeadLength() {
+        return HEAD_LEN + response.getHeadLength();
+    }
+
     public Response getResponse() {
         return response;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ResponseMessage message = (ResponseMessage) o;
-        return response.equals(message.response);
-    }
-
-    @Override
-    public int hashCode() {
-        return response.hashCode();
     }
 }
