@@ -20,7 +20,7 @@ public abstract class ResponseMessage {
         TransferPacket.BodyBuffer buffer = response.getBodyBuffer();
         buffer.position(response.getHeadLength());
         int type = buffer.getInt();
-        IResponseType messageType = (IResponseType) MessageFactory.fromTypeCode(type);
+        IResponseType messageType = MessageFactory.fromTypeCode(ResponseType.SERVER, type);
         if (messageType == null)
             return null;
         ResponseMessage message = null;
