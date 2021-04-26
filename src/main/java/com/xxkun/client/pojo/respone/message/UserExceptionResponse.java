@@ -2,7 +2,7 @@ package com.xxkun.client.pojo.respone.message;
 
 import com.xxkun.client.component.exception.MessageResolutionException;
 import com.xxkun.client.pojo.respone.IResponseType;
-import com.xxkun.client.pojo.respone.MessageFactory;
+import com.xxkun.client.common.MessageFactory;
 import com.xxkun.client.pojo.respone.Response;
 import com.xxkun.client.pojo.respone.ResponseMessage;
 

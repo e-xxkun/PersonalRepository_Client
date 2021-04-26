@@ -1,5 +1,6 @@
 package com.xxkun.client.pojo.respone;
 
+import com.xxkun.client.common.MessageFactory;
 import com.xxkun.client.component.exception.MessageResolutionException;
 import com.xxkun.udptransfer.TransferPacket;
 

@@ -39,14 +39,7 @@ public class MainController {
     private PersonalInfo info;
 
     public MainController() {
-        Transfer transferTmp;
-        try {
-            transferTmp = LocalServer.getTransfer();
-        } catch (SocketException e) {
-            transferTmp = null;
-            e.printStackTrace();
-        }
-        transfer = transferTmp;
+        transfer = LocalServer.INSTANCE;
         socketAddress = new InetSocketAddress("127.0.0.1", 8876);
     }
 

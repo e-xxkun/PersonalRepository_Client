@@ -1,12 +1,17 @@
-package com.xxkun.client.pojo.respone;
+package com.xxkun.client.common;
 
 import com.xxkun.client.component.exception.MessageResolutionException;
+import com.xxkun.client.pojo.respone.IResponseType;
+import com.xxkun.client.pojo.respone.Response;
+import com.xxkun.client.pojo.respone.ResponseMessage;
+import com.xxkun.client.pojo.respone.ResponseType;
 
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MessageFactory {
+public enum  MessageFactory {
+    ;
 
     private static EnumMap<ResponseType, Map<Integer, IResponseType>> typeMap;
 

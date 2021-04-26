@@ -1,34 +1,27 @@
 package com.xxkun.client.component.transfer;
 
-import com.xxkun.client.component.exception.RequestConvertException;
+import com.xxkun.client.component.exception.TransferServerException;
 import com.xxkun.client.pojo.request.Request;
-import com.xxkun.udptransfer.PacketPool;
 import com.xxkun.udptransfer.TransferPacket;
 import com.xxkun.udptransfer.TransferServer;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
 import java.net.SocketException;
 
-public class LocalServer implements Transfer {
+public enum  LocalServer implements Transfer {
+    INSTANCE;
 
-    private static volatile LocalServer INSTANCE;
+    private static final TransferServer server;
 
-    public static Transfer getTransfer() throws SocketException {
-        if (INSTANCE == null) {
-            synchronized (LocalServer.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new LocalServer();
-                }
-            }
+    static  {
+        TransferServer transferServer;
+        try {
+            transferServer = new TransferServer();
+        } catch (SocketException e) {
+            e.printStackTrace();
+            transferServer = null;
         }
-        return INSTANCE;
-    }
-
-    private final TransferServer server;
-
-    private LocalServer() throws SocketException {
-        server = new TransferServer();
+        server = transferServer;
     }
 
     @Override
