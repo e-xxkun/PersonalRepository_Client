@@ -3,6 +3,7 @@ package com.xxkun.client.controller;
 import com.xxkun.client.common.PersonalInfo;
 import com.xxkun.client.component.transfer.LocalServer;
 import com.xxkun.client.component.transfer.Transfer;
+import com.xxkun.client.connection.ServerConnection;
 import com.xxkun.client.pojo.request.HeartbeatRequest;
 import com.xxkun.client.pojo.request.Request;
 import javafx.event.ActionEvent;
@@ -52,9 +53,8 @@ public class MainController {
     }
 
     public void heartbeat(ActionEvent actionEvent) {
-        HeartbeatRequest request = new HeartbeatRequest(socketAddress);
         PersonalInfo.INSTANCE.setToken(heartbeatText.getCharacters().toString());
-        transfer.send(request);
+        ServerConnection.INSTANCE.connect();
     }
 
     public void logout(ActionEvent actionEvent) {

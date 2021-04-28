@@ -16,7 +16,7 @@ public enum PersonalInfo {
 
     private NatType natType;
 
-    private String token;
+    private volatile String token;
 
     private String url;
 
