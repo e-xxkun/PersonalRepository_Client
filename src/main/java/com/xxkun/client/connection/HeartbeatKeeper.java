@@ -5,7 +5,6 @@ import com.xxkun.client.component.transfer.LocalServer;
 import com.xxkun.client.component.transfer.Transfer;
 import com.xxkun.client.pojo.request.Request;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.DelayQueue;
@@ -50,6 +49,7 @@ public enum  HeartbeatKeeper {
                 if (!userSet.contains(obj.getUserId())) {
                     continue;
                 }
+                System.out.println(obj);
                 transfer.send(obj.getHeartbeatRequest());
                 obj.setStartDate(System.currentTimeMillis());
                 userQueue.add(obj);

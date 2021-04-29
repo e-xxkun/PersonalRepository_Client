@@ -1,6 +1,5 @@
 package com.xxkun.client.component.transfer;
 
-import com.xxkun.client.component.exception.TransferServerException;
 import com.xxkun.client.pojo.request.Request;
 import com.xxkun.udptransfer.TransferPacket;
 import com.xxkun.udptransfer.TransferServer;

@@ -2,7 +2,6 @@ package com.xxkun.client.connection;
 
 import com.xxkun.client.common.PersonalInfo;
 import com.xxkun.client.common.ServerInfo;
-import com.xxkun.client.dao.Peer;
 import com.xxkun.client.pojo.request.HeartbeatRequest;
 import com.xxkun.client.pojo.request.Request;
 
@@ -27,7 +26,7 @@ public enum  ServerConnection {
     }
 
     class ServerHeartbeat implements HeartbeatKeeper.Heartbeat {
-        private static final long HEARTBEAT_TIME = 5 * 1000;
+        private static final long HEARTBEAT_TIME = 20 * 1000;
 
         private final ServerInfo server;
         private long startTime;
@@ -56,13 +55,12 @@ public enum  ServerConnection {
 
         @Override
         public long getDelay(TimeUnit unit) {
-            return HEARTBEAT_TIME;
+            return unit.convert(startTime + HEARTBEAT_TIME - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
 
         @Override
         public int compareTo(Delayed o) {
-            return (startTime - ((ServerHeartbeat) o).startTime
-                    + getDelay(TimeUnit.MILLISECONDS) -  o.getDelay(TimeUnit.MILLISECONDS)) <= 0 ? -1 : 1;
+            return (int) (getDelay(TimeUnit.MILLISECONDS) -  o.getDelay(TimeUnit.MILLISECONDS));
         }
     }
 }

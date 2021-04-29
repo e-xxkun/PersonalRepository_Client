@@ -39,13 +39,12 @@ public enum PeerConnectionPool {
 
         @Override
         public long getDelay(TimeUnit unit) {
-            return HEARTBEAT_TIME;
+            return unit.convert(startTime + HEARTBEAT_TIME - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
 
         @Override
         public int compareTo(Delayed o) {
-            return (startTime - ((PeerHeartbeat) o).startTime
-                    + getDelay(TimeUnit.MILLISECONDS) -  o.getDelay(TimeUnit.MILLISECONDS)) <= 0 ? -1 : 1;
+            return (int) (getDelay(TimeUnit.MILLISECONDS) -  o.getDelay(TimeUnit.MILLISECONDS));
         }
     }
 }
