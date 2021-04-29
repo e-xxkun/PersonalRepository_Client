@@ -9,7 +9,7 @@ public abstract class Request {
 
     private static final int TOKEN_LEN = 16;
     //    client_version|request_type|token|message_type  ->  int|int|char[16]|int
-    private static final int HEAD_LEN = 2 * Integer.BYTES + TOKEN_LEN * Character.BYTES;
+    private static final int HEAD_LEN = 3 * Integer.BYTES + TOKEN_LEN * Character.BYTES;
 
     private final int clientVersion = 1;
     private final TransferPacket.BodyBuffer bodyBuffer;

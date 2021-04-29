@@ -49,7 +49,6 @@ public enum  HeartbeatKeeper {
                 if (!userSet.contains(obj.getUserId())) {
                     continue;
                 }
-                System.out.println(obj);
                 transfer.send(obj.getHeartbeatRequest());
                 obj.setStartDate(System.currentTimeMillis());
                 userQueue.add(obj);
