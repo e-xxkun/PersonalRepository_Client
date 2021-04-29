@@ -1,18 +1,14 @@
 package com.xxkun.client.controller;
 
 import com.xxkun.client.common.PersonalInfo;
-import com.xxkun.client.component.transfer.LocalServer;
-import com.xxkun.client.component.transfer.Transfer;
+import com.xxkun.client.common.ServerInfo;
 import com.xxkun.client.connection.ServerConnection;
-import com.xxkun.client.pojo.request.HeartbeatRequest;
-import com.xxkun.client.pojo.request.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.net.InetSocketAddress;
-import java.net.SocketException;
 
 public class MainController {
     @FXML
@@ -35,15 +31,13 @@ public class MainController {
     @FXML
     private Button logoutButton;
 
-    private final Transfer transfer;
-    private InetSocketAddress socketAddress;
-    private PersonalInfo info;
-
     public MainController() {
-        transfer = LocalServer.INSTANCE;
-        socketAddress = new InetSocketAddress("127.0.0.1", 8876);
+        ServerInfo.SERVER_1.setServerId(-87994);
+        ServerInfo.SERVER_1.setSocketAddress(new InetSocketAddress("127.0.0.1", 8874));
+        ServerInfo.SERVER_2.setServerId(-87995);
+        ServerInfo.SERVER_2.setSocketAddress(new InetSocketAddress("127.0.0.1", 8974));
+//        ServerInfo.SERVER_2.setSocketAddress(new InetSocketAddress("127.0.0.1", 8931));
     }
-
 
     public void login(ActionEvent actionEvent) {
     }
