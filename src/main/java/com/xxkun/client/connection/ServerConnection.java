@@ -25,7 +25,7 @@ public enum  ServerConnection {
         }).start();
     }
 
-    class ServerHeartbeat implements HeartbeatKeeper.Heartbeat {
+    static class ServerHeartbeat implements HeartbeatKeeper.Heartbeat {
         private static final long HEARTBEAT_TIME = 10 * 1000;
 
         private final ServerInfo server;

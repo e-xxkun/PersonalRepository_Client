@@ -35,7 +35,7 @@ public class MainController {
         ServerInfo.SERVER_1.setServerId(-87994);
         ServerInfo.SERVER_1.setSocketAddress(new InetSocketAddress("127.0.0.1", 8874));
         ServerInfo.SERVER_2.setServerId(-87995);
-        ServerInfo.SERVER_2.setSocketAddress(new InetSocketAddress("127.0.0.1", 8974));
+        ServerInfo.SERVER_2.setSocketAddress(new InetSocketAddress("127.0.0.1", 8874));
 //        ServerInfo.SERVER_2.setSocketAddress(new InetSocketAddress("127.0.0.1", 8931));
     }
 
