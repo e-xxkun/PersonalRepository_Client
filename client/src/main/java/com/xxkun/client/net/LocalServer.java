@@ -1,12 +1,12 @@
 package com.xxkun.client.net;
 
 import com.xxkun.client.common.BaseThread;
-import com.xxkun.client.component.exception.ResponseResolutionException;
 import com.xxkun.client.pojo.request.BaseRequest;
-import com.xxkun.client.pojo.respone.BaseResponse;
+import com.xxkun.client.pojo.respone.BasePeerResponse;
+import com.xxkun.client.pojo.respone.BaseServerResponse;
+import com.xxkun.client.pojo.respone.BaseCustomResponse;
 
 import java.io.IOException;
-import java.net.SocketAddress;
 import java.net.SocketException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -16,7 +16,7 @@ public enum  LocalServer {
     INSTANCE;
 
     private static final BaseServer server;
-    private static OnResponse onResponse;
+    private static OnResponseReceive onResponseReceive;
     private static ThreadPoolExecutor responseThreadPool;
     private static ResponseListener responseListener;
 
@@ -34,8 +34,8 @@ public enum  LocalServer {
         responseListener.start();
     }
 
-    public static void setOnResponse(OnResponse onResponse) {
-        LocalServer.onResponse = onResponse;
+    public static void setOnResponseReceive(OnResponseReceive onResponseReceive) {
+        LocalServer.onResponseReceive = onResponseReceive;
     }
 
     public void send(BaseRequest request) {
@@ -66,12 +66,27 @@ public enum  LocalServer {
                     e.printStackTrace();
                     continue;
                 }
+                if (onResponseReceive == null) {
+                    continue;
+                }
                 responseThreadPool.execute(() -> {
-                    try {
-                        BaseResponse response = BaseResponse.decodeFromPacket(packet.getBuffer(), packet.getSocketAddress());
-                        onResponse.onResponse(packet.getSocketAddress(), response);
-                    } catch (ResponseResolutionException e) {
-                        System.out.println("Invalid message from " + packet.getSocketAddress() + ":" + new String(packet.convertToByteArray()));
+                    if (packet.getType().isCustom()) {
+                        BaseCustomResponse response = BaseCustomResponse.decodeFromPacket(packet.getBuffer(), packet.getSocketAddress());
+                        if (response != null) {
+                            onResponseReceive.onCustomResponseReceive(response);
+                        } else {
+                            onResponseReceive.onCustomResponseResolutionException(response);
+                        }
+                    } else if (packet.getType().isPeer()) {
+                        BasePeerResponse response = BasePeerResponse.decodeFromPacket(packet.getBuffer(), packet.getSocketAddress());
+                        if (response != null) {
+                            onResponseReceive.onPeerResponseReceive(response);
+                        }
+                    } else if (packet.getType().isServer()) {
+                        BaseServerResponse response = BaseServerResponse.decodeFromPacket(packet.getBuffer(), packet.getSocketAddress());
+                        if (response != null) {
+                            onResponseReceive.onServerResponseReceive(response);
+                        }
                     }
                 });
             }
@@ -82,7 +97,14 @@ public enum  LocalServer {
         responseListener.close();
     }
 
-    interface OnResponse {
-        void onResponse(SocketAddress from, BaseResponse response);
+    interface OnResponseReceive {
+
+        void onCustomResponseReceive(BaseCustomResponse response);
+
+        void onPeerResponseReceive(BasePeerResponse response);
+
+        void onServerResponseReceive(BaseServerResponse response);
+
+        void onCustomResponseResolutionException(BaseCustomResponse response);
     }
 }
