@@ -1,0 +1,20 @@
+syntax = "proto3";
+package com.xxkun.client.msg.bean;
+
+import "google/protobuf/any.proto";
+import "com/xxkun/client/msg/Protocol.proto";
+
+message BasePacket {
+  int32 HEAD = 1;
+  Type type = 2;
+  ProtocolType protocol_type = 3;
+  int32 bodyLength = 4;
+  google.protobuf.Any protocol = 5;
+  google.protobuf.Any body = 6;
+
+  enum Type {
+    SERVER = 0;
+    PEER = 1;
+    CUSTOM = 2;
+  }
+}

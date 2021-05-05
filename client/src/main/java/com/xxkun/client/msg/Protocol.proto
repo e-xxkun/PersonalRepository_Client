@@ -1,0 +1,11 @@
+syntax = "proto3";
+package com.xxkun.client.msg.bean;
+
+message TimeoutRetry {
+
+}
+
+enum ProtocolType {
+  NONE = 0;
+  TIMEOUT_RETRY = 1;
+}

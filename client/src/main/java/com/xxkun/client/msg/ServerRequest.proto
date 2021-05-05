@@ -1,0 +1,9 @@
+syntax = "proto3";
+package com.xxkun.client.msg.bean;
+
+import "google/protobuf/any.proto";
+
+message BaseRequest {
+  Type type = 1;
+  google.protobuf.Any body = 2;
+}
