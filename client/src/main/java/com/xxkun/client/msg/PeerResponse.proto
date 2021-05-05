@@ -1,6 +1,6 @@
 syntax = "proto3";
 package com.xxkun.client.msg.bean;
 
-message BaseResponse {
+message BasePeerResponse {
 
 }

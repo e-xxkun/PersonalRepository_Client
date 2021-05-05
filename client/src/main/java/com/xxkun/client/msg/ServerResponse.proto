@@ -1,16 +1,17 @@
 syntax = "proto3";
 package com.xxkun.client.msg.bean;
 
-message BaseResponse {
+message BaseServerResponse {
   ResponseType response_type = 1;
+
+  enum ResponseType {
+    UPDATE_TOKEN = 0;
+    PUNCH = 1;
+    USER_EXCEPTION = 2;
+    MSG_REPLY = 3;
+  }
 }
 
-enum ResponseType {
-  UPDATE_TOKEN = 0;
-  PUNCH = 1;
-  USER_EXCEPTION = 2;
-  MSG_REPLY = 3;
-}
 
 message UpdateTokenResponse {
   string token = 1;

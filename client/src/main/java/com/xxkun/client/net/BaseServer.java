@@ -2,6 +2,8 @@ package com.xxkun.client.net;
 
 import com.xxkun.client.connection.PeerConnectionPool;
 import com.xxkun.client.connection.ServerConnection;
+import com.xxkun.client.msg.bean.BasePacket;
+import com.xxkun.client.msg.handler.BasePacketHandler;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -25,45 +27,55 @@ class BaseServer {
 
     private OnExceptionPacketReceive onPacketReceive;
 
-    public void send(BasePacket packet) throws IOException {
-        DatagramPacket datagramPacket = new DatagramPacket(packet.convertToByteArray(), packet.length(), packet.getSocketAddress());
-        ProtocolHandler.sendBefor(packet, this);
+    public void send(BasePacket.Packet packet, InetSocketAddress socketAddress) throws IOException {
+        byte[] data = packet.toByteArray();
+        DatagramPacket datagramPacket = new DatagramPacket(data, data.length, socketAddress);
+        ProtocolHandler.sendBefor(packet, socketAddress, this);
         socket.send(datagramPacket);
-        ProtocolHandler.sendAfter(packet, this);
+        ProtocolHandler.sendAfter(packet, socketAddress, this);
     }
 
-    public BasePacket receive() throws IOException {
+    public BasePacketExtend receive() throws IOException {
         DatagramPacket packet = pool.createPacket();
         while (true) {
             socket.receive(packet);
             InetSocketAddress socketAddress = (InetSocketAddress) packet.getSocketAddress();
-            BasePacket basePacket = BasePacket.decodeFromByteArray(packet.getData(), socketAddress);
-            if (basePacket == null) {
+            BasePacket.Packet basePacket = BasePacket.Packet.parseFrom(packet.getData());
+            if (!BasePacketHandler.INSTANCE.check(basePacket)) {
                 continue;
             }
-            if (basePacket.getType().isServer()) {
+            if (basePacket.getType() == BasePacket.Packet.Type.SERVER) {
                 if (!serverConnection.contains(socketAddress)) {
                     continue;
                 }
             } else if (!peerConnectionPool.contains(socketAddress)) {
                 if (onPacketReceive != null) {
-                    onPacketReceive.onPeerNotExist(basePacket);
+                    onPacketReceive.onPeerNotExist(basePacket , socketAddress);
                 }
                 continue;
             }
-            if (!ProtocolHandler.receive(basePacket, this)) {
+            if (!ProtocolHandler.receive(basePacket, socketAddress, this)) {
                 continue;
             }
-            return basePacket;
+            return new BasePacketExtend(basePacket, socketAddress);
         }
     }
 
-    public void setOnPacketReceive(OnExceptionPacketReceive onPacketReceive) {
+    public void setOnExceptionPacketReceive(OnExceptionPacketReceive onPacketReceive) {
         this.onPacketReceive = onPacketReceive;
     }
 
     interface OnExceptionPacketReceive {
+        void onPeerNotExist(BasePacket.Packet basePacket, InetSocketAddress socketAddress);
+    }
 
-        void onPeerNotExist(BasePacket packet);
+    static class BasePacketExtend {
+        BasePacket.Packet packet;
+        InetSocketAddress socketAddress;
+
+        BasePacketExtend(BasePacket.Packet packet, InetSocketAddress socketAddress) {
+            this.packet = packet;
+            this.socketAddress = socketAddress;
+        }
     }
 }

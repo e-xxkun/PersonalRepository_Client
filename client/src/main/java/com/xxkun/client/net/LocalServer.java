@@ -1,12 +1,12 @@
 package com.xxkun.client.net;
 
+import com.google.protobuf.Any;
 import com.xxkun.client.common.BaseThread;
-import com.xxkun.client.pojo.request.BaseRequest;
-import com.xxkun.client.pojo.respone.BasePeerResponse;
-import com.xxkun.client.pojo.respone.BaseServerResponse;
-import com.xxkun.client.pojo.respone.BaseCustomResponse;
+import com.xxkun.client.msg.bean.BasePacket;
+import com.xxkun.client.msg.handler.BasePacketHandler;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -16,7 +16,6 @@ public enum  LocalServer {
     INSTANCE;
 
     private static final BaseServer server;
-    private static OnResponseReceive onResponseReceive;
     private static ThreadPoolExecutor responseThreadPool;
     private static ResponseListener responseListener;
 
@@ -34,20 +33,10 @@ public enum  LocalServer {
         responseListener.start();
     }
 
-    public static void setOnResponseReceive(OnResponseReceive onResponseReceive) {
-        LocalServer.onResponseReceive = onResponseReceive;
-    }
-
-    public void send(BaseRequest request) {
+    public void send(BasePacket.Packet packet, InetSocketAddress socketAddress) {
         try {
-            BasePacket packet = new BasePacket(request.getSocketAddress(), request.getBodyBuffer(), request.getType(), request.getProtocolType(), request.length() - BasePacket.HEAD_LEN);
-            server.send(packet);
-            while (request.hashNext()) {
-                request = request.next();
-                BasePacket packetNext = new BasePacket(request.getSocketAddress(), request.getBodyBuffer(), request.getType(), request.getProtocolType(), request.length() - BasePacket.HEAD_LEN);
-                server.send(packetNext);
-            }
-            System.out.println("SEND: to " + request.getSocketAddress());
+            server.send(packet, socketAddress);
+            System.out.println("SEND: to " + socketAddress);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,35 +47,19 @@ public enum  LocalServer {
         public void run() {
             while (!stop) {
                 System.out.println("LISTEN START");
-                BasePacket packet;
+                BaseServer.BasePacketExtend packetExtend;
                 try {
-                    packet = server.receive();
-                    System.out.println("RECEIVE: from" + packet.getSocketAddress());
+                    packetExtend = server.receive();
+                    System.out.println("RECEIVE: from" + packetExtend.socketAddress);
                 } catch (IOException e) {
                     e.printStackTrace();
                     continue;
                 }
-                if (onResponseReceive == null) {
-                    continue;
-                }
                 responseThreadPool.execute(() -> {
-                    if (packet.getType().isCustom()) {
-                        BaseCustomResponse response = BaseCustomResponse.decodeFromPacket(packet.getBuffer(), packet.getSocketAddress());
-                        if (response != null) {
-                            onResponseReceive.onCustomResponseReceive(response);
-                        } else {
-                            onResponseReceive.onCustomResponseResolutionException(response);
-                        }
-                    } else if (packet.getType().isPeer()) {
-                        BasePeerResponse response = BasePeerResponse.decodeFromPacket(packet.getBuffer(), packet.getSocketAddress());
-                        if (response != null) {
-                            onResponseReceive.onPeerResponseReceive(response);
-                        }
-                    } else if (packet.getType().isServer()) {
-                        BaseServerResponse response = BaseServerResponse.decodeFromPacket(packet.getBuffer(), packet.getSocketAddress());
-                        if (response != null) {
-                            onResponseReceive.onServerResponseReceive(response);
-                        }
+                    Any any = packetExtend.packet.getBody();
+                    BasePacketHandler.NextHandler nextHandler = BasePacketHandler.getNextHandler(packetExtend.packet.getType());
+                    if (!nextHandler.consume(any, packetExtend.socketAddress)) {
+                        System.out.println("FAIL: " + packetExtend.socketAddress);
                     }
                 });
             }
@@ -95,16 +68,5 @@ public enum  LocalServer {
 
     public void close() {
         responseListener.close();
-    }
-
-    interface OnResponseReceive {
-
-        void onCustomResponseReceive(BaseCustomResponse response);
-
-        void onPeerResponseReceive(BasePeerResponse response);
-
-        void onServerResponseReceive(BaseServerResponse response);
-
-        void onCustomResponseResolutionException(BaseCustomResponse response);
     }
 }
