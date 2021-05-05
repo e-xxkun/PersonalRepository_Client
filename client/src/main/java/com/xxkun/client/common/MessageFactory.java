@@ -1,6 +1,6 @@
 package com.xxkun.client.common;
 
-import com.xxkun.client.component.exception.MessageResolutionException;
+import com.xxkun.client.common.exception.MessageResolutionException;
 import com.xxkun.client.pojo.respone.IServerResponseType;
 import com.xxkun.client.pojo.respone.BaseResponse;
 import com.xxkun.client.pojo.respone.BaseMessage;

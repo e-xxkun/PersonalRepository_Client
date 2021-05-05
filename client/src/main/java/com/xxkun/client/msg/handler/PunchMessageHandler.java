@@ -1,4 +1,4 @@
-package com.xxkun.client.component.handler;
+package com.xxkun.client.msg.handler;
 
 import com.xxkun.client.pojo.respone.BaseMessage;
 

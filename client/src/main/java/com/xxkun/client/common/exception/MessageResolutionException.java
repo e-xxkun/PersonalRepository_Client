@@ -1,4 +1,4 @@
-package com.xxkun.client.component.exception;
+package com.xxkun.client.common.exception;
 
 public class MessageResolutionException extends Exception{
 }
