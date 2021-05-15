@@ -3,7 +3,7 @@ package com.xxkun.client.net;
 import com.google.protobuf.Any;
 import com.xxkun.client.common.BaseThread;
 import com.xxkun.client.msg.bean.BasePacket;
-import com.xxkun.client.msg.handler.BasePacketHandler;
+import com.xxkun.client.msg.handler.BasePacketResponseHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -57,7 +57,7 @@ public enum  LocalServer {
                 }
                 responseThreadPool.execute(() -> {
                     Any any = packetExtend.packet.getBody();
-                    BasePacketHandler.NextHandler nextHandler = BasePacketHandler.getNextHandler(packetExtend.packet.getType());
+                    BasePacketResponseHandler.NextHandler nextHandler = BasePacketResponseHandler.getNextHandler(packetExtend.packet.getType());
                     if (!nextHandler.consume(any, packetExtend.socketAddress)) {
                         System.out.println("FAIL: " + packetExtend.socketAddress);
                     }

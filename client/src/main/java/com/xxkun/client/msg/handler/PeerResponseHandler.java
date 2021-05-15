@@ -5,7 +5,7 @@ import com.xxkun.client.msg.bean.BasePacket;
 
 import java.net.InetSocketAddress;
 
-public class PeerRequestHandler extends BasePacketHandler.NextHandler {
+public class PeerResponseHandler extends BasePacketResponseHandler.NextHandler {
     @Override
     BasePacket.Packet.Type getType() {
         return BasePacket.Packet.Type.SERVER;

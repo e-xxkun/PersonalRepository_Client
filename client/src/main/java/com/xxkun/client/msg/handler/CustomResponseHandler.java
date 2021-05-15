@@ -5,7 +5,7 @@ import com.xxkun.client.msg.bean.BasePacket;
 
 import java.net.InetSocketAddress;
 
-public class ServerRequestHandler extends BasePacketHandler.NextHandler {
+public class CustomResponseHandler extends BasePacketResponseHandler.NextHandler {
     @Override
     BasePacket.Packet.Type getType() {
         return BasePacket.Packet.Type.SERVER;
@@ -15,4 +15,6 @@ public class ServerRequestHandler extends BasePacketHandler.NextHandler {
     public boolean consume(Any body, InetSocketAddress socketAddress) {
         return false;
     }
+
+
 }

@@ -2,8 +2,8 @@ package com.xxkun.client.net;
 
 import com.xxkun.client.connection.PeerConnectionPool;
 import com.xxkun.client.connection.ServerConnection;
-import com.xxkun.client.msg.bean.BasePacket;
-import com.xxkun.client.msg.handler.BasePacketHandler;
+import com.xxkun.client.msg.bean.BasePacket.Packet;
+import com.xxkun.client.msg.handler.BasePacketResponseHandler;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -27,7 +27,7 @@ class BaseServer {
 
     private OnExceptionPacketReceive onPacketReceive;
 
-    public void send(BasePacket.Packet packet, InetSocketAddress socketAddress) throws IOException {
+    public void send(Packet packet, InetSocketAddress socketAddress) throws IOException {
         byte[] data = packet.toByteArray();
         DatagramPacket datagramPacket = new DatagramPacket(data, data.length, socketAddress);
         ProtocolHandler.sendBefor(packet, socketAddress, this);
@@ -40,11 +40,11 @@ class BaseServer {
         while (true) {
             socket.receive(packet);
             InetSocketAddress socketAddress = (InetSocketAddress) packet.getSocketAddress();
-            BasePacket.Packet basePacket = BasePacket.Packet.parseFrom(packet.getData());
-            if (!BasePacketHandler.INSTANCE.check(basePacket)) {
+            Packet basePacket = Packet.parseFrom(packet.getData());
+            if (!BasePacketResponseHandler.INSTANCE.check(basePacket)) {
                 continue;
             }
-            if (basePacket.getType() == BasePacket.Packet.Type.SERVER) {
+            if (basePacket.getType() == Packet.Type.SERVER) {
                 if (!serverConnection.contains(socketAddress)) {
                     continue;
                 }
@@ -66,14 +66,14 @@ class BaseServer {
     }
 
     interface OnExceptionPacketReceive {
-        void onPeerNotExist(BasePacket.Packet basePacket, InetSocketAddress socketAddress);
+        void onPeerNotExist(Packet basePacket, InetSocketAddress socketAddress);
     }
 
     static class BasePacketExtend {
-        BasePacket.Packet packet;
+        Packet packet;
         InetSocketAddress socketAddress;
 
-        BasePacketExtend(BasePacket.Packet packet, InetSocketAddress socketAddress) {
+        BasePacketExtend(Packet packet, InetSocketAddress socketAddress) {
             this.packet = packet;
             this.socketAddress = socketAddress;
         }
