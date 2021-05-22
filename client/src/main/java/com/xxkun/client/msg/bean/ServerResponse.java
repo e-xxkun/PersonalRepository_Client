@@ -28,6 +28,21 @@ public final class ServerResponse {
      * @return The responseType.
      */
     com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse.ResponseType getResponseType();
+
+    /**
+     * <code>.google.protobuf.Any body = 2;</code>
+     * @return Whether the body field is set.
+     */
+    boolean hasBody();
+    /**
+     * <code>.google.protobuf.Any body = 2;</code>
+     * @return The body.
+     */
+    com.google.protobuf.Any getBody();
+    /**
+     * <code>.google.protobuf.Any body = 2;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getBodyOrBuilder();
   }
   /**
    * Protobuf type {@code com.xxkun.client.msg.bean.BaseServerResponse}
@@ -79,6 +94,19 @@ public final class ServerResponse {
               int rawValue = input.readEnum();
 
               responseType_ = rawValue;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (body_ != null) {
+                subBuilder = body_.toBuilder();
+              }
+              body_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(body_);
+                body_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -258,6 +286,32 @@ public final class ServerResponse {
       return result == null ? com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse.ResponseType.UNRECOGNIZED : result;
     }
 
+    public static final int BODY_FIELD_NUMBER = 2;
+    private com.google.protobuf.Any body_;
+    /**
+     * <code>.google.protobuf.Any body = 2;</code>
+     * @return Whether the body field is set.
+     */
+    @java.lang.Override
+    public boolean hasBody() {
+      return body_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Any body = 2;</code>
+     * @return The body.
+     */
+    @java.lang.Override
+    public com.google.protobuf.Any getBody() {
+      return body_ == null ? com.google.protobuf.Any.getDefaultInstance() : body_;
+    }
+    /**
+     * <code>.google.protobuf.Any body = 2;</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.AnyOrBuilder getBodyOrBuilder() {
+      return getBody();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -275,6 +329,9 @@ public final class ServerResponse {
       if (responseType_ != com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse.ResponseType.UPDATE_TOKEN.getNumber()) {
         output.writeEnum(1, responseType_);
       }
+      if (body_ != null) {
+        output.writeMessage(2, getBody());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -287,6 +344,10 @@ public final class ServerResponse {
       if (responseType_ != com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse.ResponseType.UPDATE_TOKEN.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, responseType_);
+      }
+      if (body_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getBody());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -304,6 +365,11 @@ public final class ServerResponse {
       com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse other = (com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse) obj;
 
       if (responseType_ != other.responseType_) return false;
+      if (hasBody() != other.hasBody()) return false;
+      if (hasBody()) {
+        if (!getBody()
+            .equals(other.getBody())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -317,6 +383,10 @@ public final class ServerResponse {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + RESPONSE_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + responseType_;
+      if (hasBody()) {
+        hash = (37 * hash) + BODY_FIELD_NUMBER;
+        hash = (53 * hash) + getBody().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -452,6 +522,12 @@ public final class ServerResponse {
         super.clear();
         responseType_ = 0;
 
+        if (bodyBuilder_ == null) {
+          body_ = null;
+        } else {
+          body_ = null;
+          bodyBuilder_ = null;
+        }
         return this;
       }
 
@@ -479,6 +555,11 @@ public final class ServerResponse {
       public com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse buildPartial() {
         com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse result = new com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse(this);
         result.responseType_ = responseType_;
+        if (bodyBuilder_ == null) {
+          result.body_ = body_;
+        } else {
+          result.body_ = bodyBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -529,6 +610,9 @@ public final class ServerResponse {
         if (other == com.xxkun.client.msg.bean.ServerResponse.BaseServerResponse.getDefaultInstance()) return this;
         if (other.responseType_ != 0) {
           setResponseTypeValue(other.getResponseTypeValue());
+        }
+        if (other.hasBody()) {
+          mergeBody(other.getBody());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -611,6 +695,125 @@ public final class ServerResponse {
         responseType_ = 0;
         onChanged();
         return this;
+      }
+
+      private com.google.protobuf.Any body_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> bodyBuilder_;
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       * @return Whether the body field is set.
+       */
+      public boolean hasBody() {
+        return bodyBuilder_ != null || body_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       * @return The body.
+       */
+      public com.google.protobuf.Any getBody() {
+        if (bodyBuilder_ == null) {
+          return body_ == null ? com.google.protobuf.Any.getDefaultInstance() : body_;
+        } else {
+          return bodyBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       */
+      public Builder setBody(com.google.protobuf.Any value) {
+        if (bodyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          body_ = value;
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       */
+      public Builder setBody(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (bodyBuilder_ == null) {
+          body_ = builderForValue.build();
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       */
+      public Builder mergeBody(com.google.protobuf.Any value) {
+        if (bodyBuilder_ == null) {
+          if (body_ != null) {
+            body_ =
+              com.google.protobuf.Any.newBuilder(body_).mergeFrom(value).buildPartial();
+          } else {
+            body_ = value;
+          }
+          onChanged();
+        } else {
+          bodyBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       */
+      public Builder clearBody() {
+        if (bodyBuilder_ == null) {
+          body_ = null;
+          onChanged();
+        } else {
+          body_ = null;
+          bodyBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       */
+      public com.google.protobuf.Any.Builder getBodyBuilder() {
+        
+        onChanged();
+        return getBodyFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getBodyOrBuilder() {
+        if (bodyBuilder_ != null) {
+          return bodyBuilder_.getMessageOrBuilder();
+        } else {
+          return body_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : body_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Any body = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getBodyFieldBuilder() {
+        if (bodyBuilder_ == null) {
+          bodyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getBody(),
+                  getParentForChildren(),
+                  isClean());
+          body_ = null;
+        }
+        return bodyBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1238,27 +1441,27 @@ public final class ServerResponse {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
-    java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer> 
-        getPeerList();
+    java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo> 
+        getPeerInfoList();
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
-    com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer getPeer(int index);
+    com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo getPeerInfo(int index);
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
-    int getPeerCount();
+    int getPeerInfoCount();
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
-    java.util.List<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder> 
-        getPeerOrBuilderList();
+    java.util.List<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder> 
+        getPeerInfoOrBuilderList();
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
-    com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder getPeerOrBuilder(
+    com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder getPeerInfoOrBuilder(
         int index);
   }
   /**
@@ -1274,7 +1477,7 @@ public final class ServerResponse {
       super(builder);
     }
     private PunchResponse() {
-      peer_ = java.util.Collections.emptyList();
+      peerInfo_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -1310,11 +1513,11 @@ public final class ServerResponse {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                peer_ = new java.util.ArrayList<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer>();
+                peerInfo_ = new java.util.ArrayList<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              peer_.add(
-                  input.readMessage(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.parser(), extensionRegistry));
+              peerInfo_.add(
+                  input.readMessage(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -1333,7 +1536,7 @@ public final class ServerResponse {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          peer_ = java.util.Collections.unmodifiableList(peer_);
+          peerInfo_ = java.util.Collections.unmodifiableList(peerInfo_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1352,8 +1555,8 @@ public final class ServerResponse {
               com.xxkun.client.msg.bean.ServerResponse.PunchResponse.class, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Builder.class);
     }
 
-    public interface PeerOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.xxkun.client.msg.bean.PunchResponse.Peer)
+    public interface PeerInfoOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:com.xxkun.client.msg.bean.PunchResponse.PeerInfo)
         com.google.protobuf.MessageOrBuilder {
 
       /**
@@ -1387,18 +1590,18 @@ public final class ServerResponse {
           getUrlBytes();
     }
     /**
-     * Protobuf type {@code com.xxkun.client.msg.bean.PunchResponse.Peer}
+     * Protobuf type {@code com.xxkun.client.msg.bean.PunchResponse.PeerInfo}
      */
-    public static final class Peer extends
+    public static final class PeerInfo extends
         com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:com.xxkun.client.msg.bean.PunchResponse.Peer)
-        PeerOrBuilder {
+        // @@protoc_insertion_point(message_implements:com.xxkun.client.msg.bean.PunchResponse.PeerInfo)
+        PeerInfoOrBuilder {
     private static final long serialVersionUID = 0L;
-      // Use Peer.newBuilder() to construct.
-      private Peer(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // Use PeerInfo.newBuilder() to construct.
+      private PeerInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
       }
-      private Peer() {
+      private PeerInfo() {
         name_ = "";
         url_ = "";
       }
@@ -1407,7 +1610,7 @@ public final class ServerResponse {
       @SuppressWarnings({"unused"})
       protected java.lang.Object newInstance(
           UnusedPrivateParameter unused) {
-        return new Peer();
+        return new PeerInfo();
       }
 
       @java.lang.Override
@@ -1415,7 +1618,7 @@ public final class ServerResponse {
       getUnknownFields() {
         return this.unknownFields;
       }
-      private Peer(
+      private PeerInfo(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1471,15 +1674,15 @@ public final class ServerResponse {
       }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_descriptor;
+        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_fieldAccessorTable
+        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.class, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder.class);
+                com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.class, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder.class);
       }
 
       public static final int ID_FIELD_NUMBER = 1;
@@ -1621,10 +1824,10 @@ public final class ServerResponse {
         if (obj == this) {
          return true;
         }
-        if (!(obj instanceof com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer)) {
+        if (!(obj instanceof com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo)) {
           return super.equals(obj);
         }
-        com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer other = (com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer) obj;
+        com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo other = (com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo) obj;
 
         if (getId()
             != other.getId()) return false;
@@ -1655,69 +1858,69 @@ public final class ServerResponse {
         return hash;
       }
 
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           java.nio.ByteBuffer data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           java.nio.ByteBuffer data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(byte[] data)
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(java.io.InputStream input)
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseDelimitedFrom(java.io.InputStream input)
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
             .parseDelimitedWithIOException(PARSER, input);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseDelimitedFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
             .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input);
       }
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parseFrom(
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -1730,7 +1933,7 @@ public final class ServerResponse {
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
       }
-      public static Builder newBuilder(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer prototype) {
+      public static Builder newBuilder(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
       @java.lang.Override
@@ -1746,26 +1949,26 @@ public final class ServerResponse {
         return builder;
       }
       /**
-       * Protobuf type {@code com.xxkun.client.msg.bean.PunchResponse.Peer}
+       * Protobuf type {@code com.xxkun.client.msg.bean.PunchResponse.PeerInfo}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.xxkun.client.msg.bean.PunchResponse.Peer)
-          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder {
+          // @@protoc_insertion_point(builder_implements:com.xxkun.client.msg.bean.PunchResponse.PeerInfo)
+          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_descriptor;
+          return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_fieldAccessorTable
+          return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                  com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.class, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder.class);
+                  com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.class, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder.class);
         }
 
-        // Construct using com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.newBuilder()
+        // Construct using com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -1795,17 +1998,17 @@ public final class ServerResponse {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_descriptor;
+          return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_descriptor;
         }
 
         @java.lang.Override
-        public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer getDefaultInstanceForType() {
-          return com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.getDefaultInstance();
+        public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo getDefaultInstanceForType() {
+          return com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.getDefaultInstance();
         }
 
         @java.lang.Override
-        public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer build() {
-          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer result = buildPartial();
+        public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo build() {
+          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(result);
           }
@@ -1813,8 +2016,8 @@ public final class ServerResponse {
         }
 
         @java.lang.Override
-        public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer buildPartial() {
-          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer result = new com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer(this);
+        public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo buildPartial() {
+          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo result = new com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo(this);
           result.id_ = id_;
           result.name_ = name_;
           result.url_ = url_;
@@ -1856,16 +2059,16 @@ public final class ServerResponse {
         }
         @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer) {
-            return mergeFrom((com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer)other);
+          if (other instanceof com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo) {
+            return mergeFrom((com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
 
-        public Builder mergeFrom(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer other) {
-          if (other == com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.getDefaultInstance()) return this;
+        public Builder mergeFrom(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo other) {
+          if (other == com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.getDefaultInstance()) return this;
           if (other.getId() != 0L) {
             setId(other.getId());
           }
@@ -1892,11 +2095,11 @@ public final class ServerResponse {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer parsedMessage = null;
+          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer) e.getUnfinishedMessage();
+            parsedMessage = (com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo) e.getUnfinishedMessage();
             throw e.unwrapIOException();
           } finally {
             if (parsedMessage != null) {
@@ -2101,84 +2304,84 @@ public final class ServerResponse {
         }
 
 
-        // @@protoc_insertion_point(builder_scope:com.xxkun.client.msg.bean.PunchResponse.Peer)
+        // @@protoc_insertion_point(builder_scope:com.xxkun.client.msg.bean.PunchResponse.PeerInfo)
       }
 
-      // @@protoc_insertion_point(class_scope:com.xxkun.client.msg.bean.PunchResponse.Peer)
-      private static final com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer DEFAULT_INSTANCE;
+      // @@protoc_insertion_point(class_scope:com.xxkun.client.msg.bean.PunchResponse.PeerInfo)
+      private static final com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo DEFAULT_INSTANCE;
       static {
-        DEFAULT_INSTANCE = new com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer();
+        DEFAULT_INSTANCE = new com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo();
       }
 
-      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer getDefaultInstance() {
+      public static com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo getDefaultInstance() {
         return DEFAULT_INSTANCE;
       }
 
-      private static final com.google.protobuf.Parser<Peer>
-          PARSER = new com.google.protobuf.AbstractParser<Peer>() {
+      private static final com.google.protobuf.Parser<PeerInfo>
+          PARSER = new com.google.protobuf.AbstractParser<PeerInfo>() {
         @java.lang.Override
-        public Peer parsePartialFrom(
+        public PeerInfo parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Peer(input, extensionRegistry);
+          return new PeerInfo(input, extensionRegistry);
         }
       };
 
-      public static com.google.protobuf.Parser<Peer> parser() {
+      public static com.google.protobuf.Parser<PeerInfo> parser() {
         return PARSER;
       }
 
       @java.lang.Override
-      public com.google.protobuf.Parser<Peer> getParserForType() {
+      public com.google.protobuf.Parser<PeerInfo> getParserForType() {
         return PARSER;
       }
 
       @java.lang.Override
-      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer getDefaultInstanceForType() {
+      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
 
     }
 
-    public static final int PEER_FIELD_NUMBER = 1;
-    private java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer> peer_;
+    public static final int PEER_INFO_FIELD_NUMBER = 1;
+    private java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo> peerInfo_;
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer> getPeerList() {
-      return peer_;
+    public java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo> getPeerInfoList() {
+      return peerInfo_;
     }
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder> 
-        getPeerOrBuilderList() {
-      return peer_;
+    public java.util.List<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder> 
+        getPeerInfoOrBuilderList() {
+      return peerInfo_;
     }
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
     @java.lang.Override
-    public int getPeerCount() {
-      return peer_.size();
+    public int getPeerInfoCount() {
+      return peerInfo_.size();
     }
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
     @java.lang.Override
-    public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer getPeer(int index) {
-      return peer_.get(index);
+    public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo getPeerInfo(int index) {
+      return peerInfo_.get(index);
     }
     /**
-     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+     * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
      */
     @java.lang.Override
-    public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder getPeerOrBuilder(
+    public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder getPeerInfoOrBuilder(
         int index) {
-      return peer_.get(index);
+      return peerInfo_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2195,8 +2398,8 @@ public final class ServerResponse {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < peer_.size(); i++) {
-        output.writeMessage(1, peer_.get(i));
+      for (int i = 0; i < peerInfo_.size(); i++) {
+        output.writeMessage(1, peerInfo_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -2207,9 +2410,9 @@ public final class ServerResponse {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < peer_.size(); i++) {
+      for (int i = 0; i < peerInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, peer_.get(i));
+          .computeMessageSize(1, peerInfo_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2226,8 +2429,8 @@ public final class ServerResponse {
       }
       com.xxkun.client.msg.bean.ServerResponse.PunchResponse other = (com.xxkun.client.msg.bean.ServerResponse.PunchResponse) obj;
 
-      if (!getPeerList()
-          .equals(other.getPeerList())) return false;
+      if (!getPeerInfoList()
+          .equals(other.getPeerInfoList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2239,9 +2442,9 @@ public final class ServerResponse {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getPeerCount() > 0) {
-        hash = (37 * hash) + PEER_FIELD_NUMBER;
-        hash = (53 * hash) + getPeerList().hashCode();
+      if (getPeerInfoCount() > 0) {
+        hash = (37 * hash) + PEER_INFO_FIELD_NUMBER;
+        hash = (53 * hash) + getPeerInfoList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2371,17 +2574,17 @@ public final class ServerResponse {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getPeerFieldBuilder();
+          getPeerInfoFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (peerBuilder_ == null) {
-          peer_ = java.util.Collections.emptyList();
+        if (peerInfoBuilder_ == null) {
+          peerInfo_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          peerBuilder_.clear();
+          peerInfoBuilder_.clear();
         }
         return this;
       }
@@ -2410,14 +2613,14 @@ public final class ServerResponse {
       public com.xxkun.client.msg.bean.ServerResponse.PunchResponse buildPartial() {
         com.xxkun.client.msg.bean.ServerResponse.PunchResponse result = new com.xxkun.client.msg.bean.ServerResponse.PunchResponse(this);
         int from_bitField0_ = bitField0_;
-        if (peerBuilder_ == null) {
+        if (peerInfoBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            peer_ = java.util.Collections.unmodifiableList(peer_);
+            peerInfo_ = java.util.Collections.unmodifiableList(peerInfo_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.peer_ = peer_;
+          result.peerInfo_ = peerInfo_;
         } else {
-          result.peer_ = peerBuilder_.build();
+          result.peerInfo_ = peerInfoBuilder_.build();
         }
         onBuilt();
         return result;
@@ -2467,29 +2670,29 @@ public final class ServerResponse {
 
       public Builder mergeFrom(com.xxkun.client.msg.bean.ServerResponse.PunchResponse other) {
         if (other == com.xxkun.client.msg.bean.ServerResponse.PunchResponse.getDefaultInstance()) return this;
-        if (peerBuilder_ == null) {
-          if (!other.peer_.isEmpty()) {
-            if (peer_.isEmpty()) {
-              peer_ = other.peer_;
+        if (peerInfoBuilder_ == null) {
+          if (!other.peerInfo_.isEmpty()) {
+            if (peerInfo_.isEmpty()) {
+              peerInfo_ = other.peerInfo_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensurePeerIsMutable();
-              peer_.addAll(other.peer_);
+              ensurePeerInfoIsMutable();
+              peerInfo_.addAll(other.peerInfo_);
             }
             onChanged();
           }
         } else {
-          if (!other.peer_.isEmpty()) {
-            if (peerBuilder_.isEmpty()) {
-              peerBuilder_.dispose();
-              peerBuilder_ = null;
-              peer_ = other.peer_;
+          if (!other.peerInfo_.isEmpty()) {
+            if (peerInfoBuilder_.isEmpty()) {
+              peerInfoBuilder_.dispose();
+              peerInfoBuilder_ = null;
+              peerInfo_ = other.peerInfo_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              peerBuilder_ = 
+              peerInfoBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getPeerFieldBuilder() : null;
+                   getPeerInfoFieldBuilder() : null;
             } else {
-              peerBuilder_.addAllMessages(other.peer_);
+              peerInfoBuilder_.addAllMessages(other.peerInfo_);
             }
           }
         }
@@ -2523,244 +2726,244 @@ public final class ServerResponse {
       }
       private int bitField0_;
 
-      private java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer> peer_ =
+      private java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo> peerInfo_ =
         java.util.Collections.emptyList();
-      private void ensurePeerIsMutable() {
+      private void ensurePeerInfoIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          peer_ = new java.util.ArrayList<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer>(peer_);
+          peerInfo_ = new java.util.ArrayList<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo>(peerInfo_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder> peerBuilder_;
+          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder> peerInfoBuilder_;
 
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer> getPeerList() {
-        if (peerBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(peer_);
+      public java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo> getPeerInfoList() {
+        if (peerInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(peerInfo_);
         } else {
-          return peerBuilder_.getMessageList();
+          return peerInfoBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public int getPeerCount() {
-        if (peerBuilder_ == null) {
-          return peer_.size();
+      public int getPeerInfoCount() {
+        if (peerInfoBuilder_ == null) {
+          return peerInfo_.size();
         } else {
-          return peerBuilder_.getCount();
+          return peerInfoBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer getPeer(int index) {
-        if (peerBuilder_ == null) {
-          return peer_.get(index);
+      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo getPeerInfo(int index) {
+        if (peerInfoBuilder_ == null) {
+          return peerInfo_.get(index);
         } else {
-          return peerBuilder_.getMessage(index);
+          return peerInfoBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder setPeer(
-          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer value) {
-        if (peerBuilder_ == null) {
+      public Builder setPeerInfo(
+          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo value) {
+        if (peerInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensurePeerIsMutable();
-          peer_.set(index, value);
+          ensurePeerInfoIsMutable();
+          peerInfo_.set(index, value);
           onChanged();
         } else {
-          peerBuilder_.setMessage(index, value);
+          peerInfoBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder setPeer(
-          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder builderForValue) {
-        if (peerBuilder_ == null) {
-          ensurePeerIsMutable();
-          peer_.set(index, builderForValue.build());
+      public Builder setPeerInfo(
+          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder builderForValue) {
+        if (peerInfoBuilder_ == null) {
+          ensurePeerInfoIsMutable();
+          peerInfo_.set(index, builderForValue.build());
           onChanged();
         } else {
-          peerBuilder_.setMessage(index, builderForValue.build());
+          peerInfoBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder addPeer(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer value) {
-        if (peerBuilder_ == null) {
+      public Builder addPeerInfo(com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo value) {
+        if (peerInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensurePeerIsMutable();
-          peer_.add(value);
+          ensurePeerInfoIsMutable();
+          peerInfo_.add(value);
           onChanged();
         } else {
-          peerBuilder_.addMessage(value);
+          peerInfoBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder addPeer(
-          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer value) {
-        if (peerBuilder_ == null) {
+      public Builder addPeerInfo(
+          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo value) {
+        if (peerInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensurePeerIsMutable();
-          peer_.add(index, value);
+          ensurePeerInfoIsMutable();
+          peerInfo_.add(index, value);
           onChanged();
         } else {
-          peerBuilder_.addMessage(index, value);
+          peerInfoBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder addPeer(
-          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder builderForValue) {
-        if (peerBuilder_ == null) {
-          ensurePeerIsMutable();
-          peer_.add(builderForValue.build());
+      public Builder addPeerInfo(
+          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder builderForValue) {
+        if (peerInfoBuilder_ == null) {
+          ensurePeerInfoIsMutable();
+          peerInfo_.add(builderForValue.build());
           onChanged();
         } else {
-          peerBuilder_.addMessage(builderForValue.build());
+          peerInfoBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder addPeer(
-          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder builderForValue) {
-        if (peerBuilder_ == null) {
-          ensurePeerIsMutable();
-          peer_.add(index, builderForValue.build());
+      public Builder addPeerInfo(
+          int index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder builderForValue) {
+        if (peerInfoBuilder_ == null) {
+          ensurePeerInfoIsMutable();
+          peerInfo_.add(index, builderForValue.build());
           onChanged();
         } else {
-          peerBuilder_.addMessage(index, builderForValue.build());
+          peerInfoBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder addAllPeer(
-          java.lang.Iterable<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer> values) {
-        if (peerBuilder_ == null) {
-          ensurePeerIsMutable();
+      public Builder addAllPeerInfo(
+          java.lang.Iterable<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo> values) {
+        if (peerInfoBuilder_ == null) {
+          ensurePeerInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, peer_);
+              values, peerInfo_);
           onChanged();
         } else {
-          peerBuilder_.addAllMessages(values);
+          peerInfoBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder clearPeer() {
-        if (peerBuilder_ == null) {
-          peer_ = java.util.Collections.emptyList();
+      public Builder clearPeerInfo() {
+        if (peerInfoBuilder_ == null) {
+          peerInfo_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          peerBuilder_.clear();
+          peerInfoBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public Builder removePeer(int index) {
-        if (peerBuilder_ == null) {
-          ensurePeerIsMutable();
-          peer_.remove(index);
+      public Builder removePeerInfo(int index) {
+        if (peerInfoBuilder_ == null) {
+          ensurePeerInfoIsMutable();
+          peerInfo_.remove(index);
           onChanged();
         } else {
-          peerBuilder_.remove(index);
+          peerInfoBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder getPeerBuilder(
+      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder getPeerInfoBuilder(
           int index) {
-        return getPeerFieldBuilder().getBuilder(index);
+        return getPeerInfoFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder getPeerOrBuilder(
+      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder getPeerInfoOrBuilder(
           int index) {
-        if (peerBuilder_ == null) {
-          return peer_.get(index);  } else {
-          return peerBuilder_.getMessageOrBuilder(index);
+        if (peerInfoBuilder_ == null) {
+          return peerInfo_.get(index);  } else {
+          return peerInfoBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public java.util.List<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder> 
-           getPeerOrBuilderList() {
-        if (peerBuilder_ != null) {
-          return peerBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder> 
+           getPeerInfoOrBuilderList() {
+        if (peerInfoBuilder_ != null) {
+          return peerInfoBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(peer_);
+          return java.util.Collections.unmodifiableList(peerInfo_);
         }
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder addPeerBuilder() {
-        return getPeerFieldBuilder().addBuilder(
-            com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.getDefaultInstance());
+      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder addPeerInfoBuilder() {
+        return getPeerInfoFieldBuilder().addBuilder(
+            com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder addPeerBuilder(
+      public com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder addPeerInfoBuilder(
           int index) {
-        return getPeerFieldBuilder().addBuilder(
-            index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.getDefaultInstance());
+        return getPeerInfoFieldBuilder().addBuilder(
+            index, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.Peer peer = 1;</code>
+       * <code>repeated .com.xxkun.client.msg.bean.PunchResponse.PeerInfo peer_info = 1;</code>
        */
-      public java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder> 
-           getPeerBuilderList() {
-        return getPeerFieldBuilder().getBuilderList();
+      public java.util.List<com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder> 
+           getPeerInfoBuilderList() {
+        return getPeerInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder> 
-          getPeerFieldBuilder() {
-        if (peerBuilder_ == null) {
-          peerBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.Peer.Builder, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerOrBuilder>(
-                  peer_,
+          com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder> 
+          getPeerInfoFieldBuilder() {
+        if (peerInfoBuilder_ == null) {
+          peerInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfo.Builder, com.xxkun.client.msg.bean.ServerResponse.PunchResponse.PeerInfoOrBuilder>(
+                  peerInfo_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          peer_ = null;
+          peerInfo_ = null;
         }
-        return peerBuilder_;
+        return peerInfoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -3645,34 +3848,34 @@ public final class ServerResponse {
 
   }
 
-  public interface MsgReplyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.xxkun.client.msg.bean.MsgReply)
+  public interface MsgReplyResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.xxkun.client.msg.bean.MsgReplyResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+     * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
      * @return The enum numeric value on the wire for type.
      */
     int getTypeValue();
     /**
-     * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+     * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
      * @return The type.
      */
-    com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type getType();
+    com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type getType();
   }
   /**
-   * Protobuf type {@code com.xxkun.client.msg.bean.MsgReply}
+   * Protobuf type {@code com.xxkun.client.msg.bean.MsgReplyResponse}
    */
-  public static final class MsgReply extends
+  public static final class MsgReplyResponse extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.xxkun.client.msg.bean.MsgReply)
-      MsgReplyOrBuilder {
+      // @@protoc_insertion_point(message_implements:com.xxkun.client.msg.bean.MsgReplyResponse)
+      MsgReplyResponseOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use MsgReply.newBuilder() to construct.
-    private MsgReply(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use MsgReplyResponse.newBuilder() to construct.
+    private MsgReplyResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private MsgReply() {
+    private MsgReplyResponse() {
       type_ = 0;
     }
 
@@ -3680,7 +3883,7 @@ public final class ServerResponse {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new MsgReply();
+      return new MsgReplyResponse();
     }
 
     @java.lang.Override
@@ -3688,7 +3891,7 @@ public final class ServerResponse {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private MsgReply(
+    private MsgReplyResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3733,19 +3936,19 @@ public final class ServerResponse {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReply_descriptor;
+      return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReply_fieldAccessorTable
+      return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.xxkun.client.msg.bean.ServerResponse.MsgReply.class, com.xxkun.client.msg.bean.ServerResponse.MsgReply.Builder.class);
+              com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.class, com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Builder.class);
     }
 
     /**
-     * Protobuf enum {@code com.xxkun.client.msg.bean.MsgReply.Type}
+     * Protobuf enum {@code com.xxkun.client.msg.bean.MsgReplyResponse.Type}
      */
     public enum Type
         implements com.google.protobuf.ProtocolMessageEnum {
@@ -3817,7 +4020,7 @@ public final class ServerResponse {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.xxkun.client.msg.bean.ServerResponse.MsgReply.getDescriptor().getEnumTypes().get(0);
+        return com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.getDescriptor().getEnumTypes().get(0);
       }
 
       private static final Type[] VALUES = values();
@@ -3840,26 +4043,26 @@ public final class ServerResponse {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:com.xxkun.client.msg.bean.MsgReply.Type)
+      // @@protoc_insertion_point(enum_scope:com.xxkun.client.msg.bean.MsgReplyResponse.Type)
     }
 
     public static final int TYPE_FIELD_NUMBER = 1;
     private int type_;
     /**
-     * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+     * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
      * @return The enum numeric value on the wire for type.
      */
     @java.lang.Override public int getTypeValue() {
       return type_;
     }
     /**
-     * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+     * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
      * @return The type.
      */
-    @java.lang.Override public com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type getType() {
+    @java.lang.Override public com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type getType() {
       @SuppressWarnings("deprecation")
-      com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type result = com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type.valueOf(type_);
-      return result == null ? com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type.UNRECOGNIZED : result;
+      com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type result = com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type.valueOf(type_);
+      return result == null ? com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3876,7 +4079,7 @@ public final class ServerResponse {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (type_ != com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type.LOGIN_EXPIRE.getNumber()) {
+      if (type_ != com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type.LOGIN_EXPIRE.getNumber()) {
         output.writeEnum(1, type_);
       }
       unknownFields.writeTo(output);
@@ -3888,7 +4091,7 @@ public final class ServerResponse {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type.LOGIN_EXPIRE.getNumber()) {
+      if (type_ != com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type.LOGIN_EXPIRE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, type_);
       }
@@ -3902,10 +4105,10 @@ public final class ServerResponse {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.xxkun.client.msg.bean.ServerResponse.MsgReply)) {
+      if (!(obj instanceof com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse)) {
         return super.equals(obj);
       }
-      com.xxkun.client.msg.bean.ServerResponse.MsgReply other = (com.xxkun.client.msg.bean.ServerResponse.MsgReply) obj;
+      com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse other = (com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse) obj;
 
       if (type_ != other.type_) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -3926,69 +4129,69 @@ public final class ServerResponse {
       return hash;
     }
 
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(byte[] data)
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(java.io.InputStream input)
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseDelimitedFrom(java.io.InputStream input)
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseDelimitedFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply parseFrom(
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4001,7 +4204,7 @@ public final class ServerResponse {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.xxkun.client.msg.bean.ServerResponse.MsgReply prototype) {
+    public static Builder newBuilder(com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -4017,26 +4220,26 @@ public final class ServerResponse {
       return builder;
     }
     /**
-     * Protobuf type {@code com.xxkun.client.msg.bean.MsgReply}
+     * Protobuf type {@code com.xxkun.client.msg.bean.MsgReplyResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.xxkun.client.msg.bean.MsgReply)
-        com.xxkun.client.msg.bean.ServerResponse.MsgReplyOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.xxkun.client.msg.bean.MsgReplyResponse)
+        com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReply_descriptor;
+        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReply_fieldAccessorTable
+        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.xxkun.client.msg.bean.ServerResponse.MsgReply.class, com.xxkun.client.msg.bean.ServerResponse.MsgReply.Builder.class);
+                com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.class, com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Builder.class);
       }
 
-      // Construct using com.xxkun.client.msg.bean.ServerResponse.MsgReply.newBuilder()
+      // Construct using com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -4062,17 +4265,17 @@ public final class ServerResponse {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReply_descriptor;
+        return com.xxkun.client.msg.bean.ServerResponse.internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_descriptor;
       }
 
       @java.lang.Override
-      public com.xxkun.client.msg.bean.ServerResponse.MsgReply getDefaultInstanceForType() {
-        return com.xxkun.client.msg.bean.ServerResponse.MsgReply.getDefaultInstance();
+      public com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse getDefaultInstanceForType() {
+        return com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.xxkun.client.msg.bean.ServerResponse.MsgReply build() {
-        com.xxkun.client.msg.bean.ServerResponse.MsgReply result = buildPartial();
+      public com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse build() {
+        com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4080,8 +4283,8 @@ public final class ServerResponse {
       }
 
       @java.lang.Override
-      public com.xxkun.client.msg.bean.ServerResponse.MsgReply buildPartial() {
-        com.xxkun.client.msg.bean.ServerResponse.MsgReply result = new com.xxkun.client.msg.bean.ServerResponse.MsgReply(this);
+      public com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse buildPartial() {
+        com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse result = new com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse(this);
         result.type_ = type_;
         onBuilt();
         return result;
@@ -4121,16 +4324,16 @@ public final class ServerResponse {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.xxkun.client.msg.bean.ServerResponse.MsgReply) {
-          return mergeFrom((com.xxkun.client.msg.bean.ServerResponse.MsgReply)other);
+        if (other instanceof com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse) {
+          return mergeFrom((com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.xxkun.client.msg.bean.ServerResponse.MsgReply other) {
-        if (other == com.xxkun.client.msg.bean.ServerResponse.MsgReply.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse other) {
+        if (other == com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
         }
@@ -4149,11 +4352,11 @@ public final class ServerResponse {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.xxkun.client.msg.bean.ServerResponse.MsgReply parsedMessage = null;
+        com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.xxkun.client.msg.bean.ServerResponse.MsgReply) e.getUnfinishedMessage();
+          parsedMessage = (com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -4165,14 +4368,14 @@ public final class ServerResponse {
 
       private int type_ = 0;
       /**
-       * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+       * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
        * @return The enum numeric value on the wire for type.
        */
       @java.lang.Override public int getTypeValue() {
         return type_;
       }
       /**
-       * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+       * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
        * @param value The enum numeric value on the wire for type to set.
        * @return This builder for chaining.
        */
@@ -4183,21 +4386,21 @@ public final class ServerResponse {
         return this;
       }
       /**
-       * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+       * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
        * @return The type.
        */
       @java.lang.Override
-      public com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type getType() {
+      public com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type getType() {
         @SuppressWarnings("deprecation")
-        com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type result = com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type.valueOf(type_);
-        return result == null ? com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type.UNRECOGNIZED : result;
+        com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type result = com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type.valueOf(type_);
+        return result == null ? com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type.UNRECOGNIZED : result;
       }
       /**
-       * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+       * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
-      public Builder setType(com.xxkun.client.msg.bean.ServerResponse.MsgReply.Type value) {
+      public Builder setType(com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse.Type value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -4207,7 +4410,7 @@ public final class ServerResponse {
         return this;
       }
       /**
-       * <code>.com.xxkun.client.msg.bean.MsgReply.Type type = 1;</code>
+       * <code>.com.xxkun.client.msg.bean.MsgReplyResponse.Type type = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearType() {
@@ -4229,41 +4432,41 @@ public final class ServerResponse {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.xxkun.client.msg.bean.MsgReply)
+      // @@protoc_insertion_point(builder_scope:com.xxkun.client.msg.bean.MsgReplyResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:com.xxkun.client.msg.bean.MsgReply)
-    private static final com.xxkun.client.msg.bean.ServerResponse.MsgReply DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.xxkun.client.msg.bean.MsgReplyResponse)
+    private static final com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.xxkun.client.msg.bean.ServerResponse.MsgReply();
+      DEFAULT_INSTANCE = new com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse();
     }
 
-    public static com.xxkun.client.msg.bean.ServerResponse.MsgReply getDefaultInstance() {
+    public static com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<MsgReply>
-        PARSER = new com.google.protobuf.AbstractParser<MsgReply>() {
+    private static final com.google.protobuf.Parser<MsgReplyResponse>
+        PARSER = new com.google.protobuf.AbstractParser<MsgReplyResponse>() {
       @java.lang.Override
-      public MsgReply parsePartialFrom(
+      public MsgReplyResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MsgReply(input, extensionRegistry);
+        return new MsgReplyResponse(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<MsgReply> parser() {
+    public static com.google.protobuf.Parser<MsgReplyResponse> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<MsgReply> getParserForType() {
+    public com.google.protobuf.Parser<MsgReplyResponse> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.xxkun.client.msg.bean.ServerResponse.MsgReply getDefaultInstanceForType() {
+    public com.xxkun.client.msg.bean.ServerResponse.MsgReplyResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4285,20 +4488,20 @@ public final class ServerResponse {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_xxkun_client_msg_bean_PunchResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_descriptor;
+    internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_fieldAccessorTable;
+      internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_xxkun_client_msg_bean_UserExceptionResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_xxkun_client_msg_bean_UserExceptionResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_xxkun_client_msg_bean_MsgReply_descriptor;
+    internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_xxkun_client_msg_bean_MsgReply_fieldAccessorTable;
+      internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4309,33 +4512,37 @@ public final class ServerResponse {
   static {
     java.lang.String[] descriptorData = {
       "\n)com/xxkun/client/msg/ServerResponse.pr" +
-      "oto\022\031com.xxkun.client.msg.bean\"\267\001\n\022BaseS" +
-      "erverResponse\022Q\n\rresponse_type\030\001 \001(\0162:.c" +
-      "om.xxkun.client.msg.bean.BaseServerRespo" +
-      "nse.ResponseType\"N\n\014ResponseType\022\020\n\014UPDA" +
-      "TE_TOKEN\020\000\022\t\n\005PUNCH\020\001\022\022\n\016USER_EXCEPTION\020" +
-      "\002\022\r\n\tMSG_REPLY\020\003\"$\n\023UpdateTokenResponse\022" +
-      "\r\n\005token\030\001 \001(\t\"{\n\rPunchResponse\022;\n\004peer\030" +
-      "\001 \003(\0132-.com.xxkun.client.msg.bean.PunchR" +
-      "esponse.Peer\032-\n\004Peer\022\n\n\002id\030\001 \001(\004\022\014\n\004name" +
-      "\030\002 \001(\t\022\013\n\003url\030\003 \001(\t\"\233\001\n\025UserExceptionRes" +
-      "ponse\022C\n\004type\030\001 \001(\01625.com.xxkun.client.m" +
-      "sg.bean.UserExceptionResponse.Type\022\017\n\007pe" +
-      "er_id\030\002 \003(\004\",\n\004Type\022\022\n\016USER_NOT_EXIST\020\000\022" +
-      "\020\n\014USER_OFFLINE\020\001\"\\\n\010MsgReply\0226\n\004type\030\001 " +
-      "\001(\0162(.com.xxkun.client.msg.bean.MsgReply" +
-      ".Type\"\030\n\004Type\022\020\n\014LOGIN_EXPIRE\020\000b\006proto3"
+      "oto\022\031com.xxkun.client.msg.bean\032\031google/p" +
+      "rotobuf/any.proto\"\333\001\n\022BaseServerResponse" +
+      "\022Q\n\rresponse_type\030\001 \001(\0162:.com.xxkun.clie" +
+      "nt.msg.bean.BaseServerResponse.ResponseT" +
+      "ype\022\"\n\004body\030\002 \001(\0132\024.google.protobuf.Any\"" +
+      "N\n\014ResponseType\022\020\n\014UPDATE_TOKEN\020\000\022\t\n\005PUN" +
+      "CH\020\001\022\022\n\016USER_EXCEPTION\020\002\022\r\n\tMSG_REPLY\020\003\"" +
+      "$\n\023UpdateTokenResponse\022\r\n\005token\030\001 \001(\t\"\210\001" +
+      "\n\rPunchResponse\022D\n\tpeer_info\030\001 \003(\01321.com" +
+      ".xxkun.client.msg.bean.PunchResponse.Pee" +
+      "rInfo\0321\n\010PeerInfo\022\n\n\002id\030\001 \001(\004\022\014\n\004name\030\002 " +
+      "\001(\t\022\013\n\003url\030\003 \001(\t\"\233\001\n\025UserExceptionRespon" +
+      "se\022C\n\004type\030\001 \001(\01625.com.xxkun.client.msg." +
+      "bean.UserExceptionResponse.Type\022\017\n\007peer_" +
+      "id\030\002 \003(\004\",\n\004Type\022\022\n\016USER_NOT_EXIST\020\000\022\020\n\014" +
+      "USER_OFFLINE\020\001\"l\n\020MsgReplyResponse\022>\n\004ty" +
+      "pe\030\001 \001(\01620.com.xxkun.client.msg.bean.Msg" +
+      "ReplyResponse.Type\"\030\n\004Type\022\020\n\014LOGIN_EXPI" +
+      "RE\020\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.AnyProto.getDescriptor(),
         });
     internal_static_com_xxkun_client_msg_bean_BaseServerResponse_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_xxkun_client_msg_bean_BaseServerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_xxkun_client_msg_bean_BaseServerResponse_descriptor,
-        new java.lang.String[] { "ResponseType", });
+        new java.lang.String[] { "ResponseType", "Body", });
     internal_static_com_xxkun_client_msg_bean_UpdateTokenResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_xxkun_client_msg_bean_UpdateTokenResponse_fieldAccessorTable = new
@@ -4347,12 +4554,12 @@ public final class ServerResponse {
     internal_static_com_xxkun_client_msg_bean_PunchResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_xxkun_client_msg_bean_PunchResponse_descriptor,
-        new java.lang.String[] { "Peer", });
-    internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_descriptor =
+        new java.lang.String[] { "PeerInfo", });
+    internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_descriptor =
       internal_static_com_xxkun_client_msg_bean_PunchResponse_descriptor.getNestedTypes().get(0);
-    internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_fieldAccessorTable = new
+    internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_xxkun_client_msg_bean_PunchResponse_Peer_descriptor,
+        internal_static_com_xxkun_client_msg_bean_PunchResponse_PeerInfo_descriptor,
         new java.lang.String[] { "Id", "Name", "Url", });
     internal_static_com_xxkun_client_msg_bean_UserExceptionResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
@@ -4360,12 +4567,13 @@ public final class ServerResponse {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_xxkun_client_msg_bean_UserExceptionResponse_descriptor,
         new java.lang.String[] { "Type", "PeerId", });
-    internal_static_com_xxkun_client_msg_bean_MsgReply_descriptor =
+    internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_com_xxkun_client_msg_bean_MsgReply_fieldAccessorTable = new
+    internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_xxkun_client_msg_bean_MsgReply_descriptor,
+        internal_static_com_xxkun_client_msg_bean_MsgReplyResponse_descriptor,
         new java.lang.String[] { "Type", });
+    com.google.protobuf.AnyProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

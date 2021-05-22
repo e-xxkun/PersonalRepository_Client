@@ -1,8 +1,10 @@
 syntax = "proto3";
 package com.xxkun.client.msg.bean;
+import "google/protobuf/any.proto";
 
 message BaseServerResponse {
   ResponseType response_type = 1;
+  google.protobuf.Any body = 2;
 
   enum ResponseType {
     UPDATE_TOKEN = 0;
@@ -18,9 +20,9 @@ message UpdateTokenResponse {
 }
 
 message PunchResponse {
-  repeated Peer peer = 1;
+  repeated PeerInfo peer_info = 1;
 
-  message Peer {
+  message PeerInfo {
     uint64 id = 1;
     string name = 2;
     string url = 3;
@@ -37,7 +39,7 @@ message UserExceptionResponse {
   }
 }
 
-message MsgReply {
+message MsgReplyResponse {
   Type type = 1;
 
   enum Type {

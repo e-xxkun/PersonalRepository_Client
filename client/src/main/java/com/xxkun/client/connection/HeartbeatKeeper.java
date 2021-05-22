@@ -1,9 +1,10 @@
 package com.xxkun.client.connection;
 
 import com.xxkun.client.common.BaseThread;
+import com.xxkun.client.msg.bean.BasePacket;
 import com.xxkun.client.net.LocalServer;
-import com.xxkun.client.pojo.request.BaseServerRequest;
 
+import java.net.InetSocketAddress;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.DelayQueue;
@@ -48,7 +49,7 @@ public enum  HeartbeatKeeper {
                 if (!userSet.contains(obj.getUserId())) {
                     continue;
                 }
-                server.send(obj.getHeartbeatRequest());
+                server.send(obj.getHeartbeatRequest(), obj.getInetSocketAddress());
                 obj.setStartDate(System.currentTimeMillis());
                 userQueue.add(obj);
             }
@@ -57,7 +58,8 @@ public enum  HeartbeatKeeper {
 
     public interface Heartbeat extends Delayed {
         long getUserId();
-        BaseServerRequest getHeartbeatRequest();
+        InetSocketAddress getInetSocketAddress();
+        BasePacket.Packet getHeartbeatRequest();
         void setStartDate(long time);
     }
 }

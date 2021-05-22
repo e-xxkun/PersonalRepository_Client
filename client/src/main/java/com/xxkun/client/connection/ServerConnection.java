@@ -2,6 +2,8 @@ package com.xxkun.client.connection;
 
 import com.xxkun.client.common.PersonalInfo;
 import com.xxkun.client.common.ServerInfo;
+import com.xxkun.client.msg.bean.BasePacket;
+import com.xxkun.client.msg.bean.ServerRequest;
 import com.xxkun.client.pojo.request.ServerHeartbeatRequest;
 import com.xxkun.client.pojo.request.BaseServerRequest;
 
@@ -35,11 +37,11 @@ public enum  ServerConnection {
 
         private final ServerInfo server;
         private long startTime;
-        private ServerHeartbeatRequest heartbeatRequest;
+        private ServerRequest.HeartbeatMessage heartbeatMessage;
 
         ServerHeartbeat(ServerInfo server) {
             this.server = server;
-            heartbeatRequest = new ServerHeartbeatRequest(server.getSocketAddress());
+            heartbeatMessage = new ServerHeartbeatRequest(server.getSocketAddress());
         }
 
         @Override
@@ -48,9 +50,14 @@ public enum  ServerConnection {
         }
 
         @Override
-        public BaseServerRequest getHeartbeatRequest() {
-            heartbeatRequest.setToken(PersonalInfo.INSTANCE.getToken());
-            return heartbeatRequest;
+        public InetSocketAddress getInetSocketAddress() {
+            return null;
+        }
+
+        @Override
+        public BasePacket.Packet getHeartbeatRequest() {
+            heartbeatMessage.setToken(PersonalInfo.INSTANCE.getToken());
+            return heartbeatMessage;
         }
 
         @Override

@@ -10,11 +10,11 @@ import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServerResponseHandler extends BasePacketResponseHandler.NextHandler {
+class ServerResponseHandler extends BasePacketResponseHandler.NextHandler {
 
     private static Map<ServerResponse.BaseServerResponse.ResponseType, ServerResponseHandler.NextHandler> map = new HashMap<>();
 
-    public static NextHandler getNextHandler(ServerResponse.BaseServerResponse.ResponseType type) {
+    protected NextHandler getNextHandler(ServerResponse.BaseServerResponse.ResponseType type) {
         return map.get(type);
     }
 
@@ -35,18 +35,18 @@ public class ServerResponseHandler extends BasePacketResponseHandler.NextHandler
             e.printStackTrace();
             return false;
         }
-        if (baseServerResponse.getResponseType() == BaseServerResponse.ResponseType.UNRECOGNIZED) {
+        BaseServerResponse.ResponseType type = baseServerResponse.getResponseType();
+        if (type == BaseServerResponse.ResponseType.UNRECOGNIZED) {
             return false;
         }
-//        return getNextHandler(baseServerResponse.getResponseType()).consume();
-        return true;
+        return getNextHandler(type).consume(baseServerResponse.getBody(), socketAddress);
     }
 
     public abstract static class NextHandler {
         NextHandler() {
             map.put(getType(), this);
         }
-        abstract BaseServerResponse.ResponseType getType();
+        protected abstract BaseServerResponse.ResponseType getType();
         public abstract boolean consume(Any body, InetSocketAddress socketAddress);
     }
 }

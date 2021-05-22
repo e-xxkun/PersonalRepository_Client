@@ -19,19 +19,10 @@ public final class BasePacket {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-     * @return Whether the hEAD field is set.
-     */
-    boolean hasHEAD();
-    /**
-     * <code>.google.protobuf.Int32Value HEAD = 1;</code>
+     * <code>int32 HEAD = 1;</code>
      * @return The hEAD.
      */
-    com.google.protobuf.Int32Value getHEAD();
-    /**
-     * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-     */
-    com.google.protobuf.Int32ValueOrBuilder getHEADOrBuilder();
+    int getHEAD();
 
     /**
      * <code>.com.xxkun.client.msg.bean.Packet.Type type = 2;</code>
@@ -56,19 +47,10 @@ public final class BasePacket {
     com.xxkun.client.msg.bean.Protocol.ProtocolType getProtocolType();
 
     /**
-     * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-     * @return Whether the bodyLength field is set.
-     */
-    boolean hasBodyLength();
-    /**
-     * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
+     * <code>int32 bodyLength = 4;</code>
      * @return The bodyLength.
      */
-    com.google.protobuf.Int32Value getBodyLength();
-    /**
-     * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-     */
-    com.google.protobuf.Int32ValueOrBuilder getBodyLengthOrBuilder();
+    int getBodyLength();
 
     /**
      * <code>.google.protobuf.Any protocol = 5;</code>
@@ -147,17 +129,9 @@ public final class BasePacket {
             case 0:
               done = true;
               break;
-            case 10: {
-              com.google.protobuf.Int32Value.Builder subBuilder = null;
-              if (hEAD_ != null) {
-                subBuilder = hEAD_.toBuilder();
-              }
-              hEAD_ = input.readMessage(com.google.protobuf.Int32Value.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(hEAD_);
-                hEAD_ = subBuilder.buildPartial();
-              }
+            case 8: {
 
+              hEAD_ = input.readInt32();
               break;
             }
             case 16: {
@@ -172,17 +146,9 @@ public final class BasePacket {
               protocolType_ = rawValue;
               break;
             }
-            case 34: {
-              com.google.protobuf.Int32Value.Builder subBuilder = null;
-              if (bodyLength_ != null) {
-                subBuilder = bodyLength_.toBuilder();
-              }
-              bodyLength_ = input.readMessage(com.google.protobuf.Int32Value.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(bodyLength_);
-                bodyLength_ = subBuilder.buildPartial();
-              }
+            case 32: {
 
+              bodyLength_ = input.readInt32();
               break;
             }
             case 42: {
@@ -361,29 +327,14 @@ public final class BasePacket {
     }
 
     public static final int HEAD_FIELD_NUMBER = 1;
-    private com.google.protobuf.Int32Value hEAD_;
+    private int hEAD_;
     /**
-     * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-     * @return Whether the hEAD field is set.
-     */
-    @java.lang.Override
-    public boolean hasHEAD() {
-      return hEAD_ != null;
-    }
-    /**
-     * <code>.google.protobuf.Int32Value HEAD = 1;</code>
+     * <code>int32 HEAD = 1;</code>
      * @return The hEAD.
      */
     @java.lang.Override
-    public com.google.protobuf.Int32Value getHEAD() {
-      return hEAD_ == null ? com.google.protobuf.Int32Value.getDefaultInstance() : hEAD_;
-    }
-    /**
-     * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-     */
-    @java.lang.Override
-    public com.google.protobuf.Int32ValueOrBuilder getHEADOrBuilder() {
-      return getHEAD();
+    public int getHEAD() {
+      return hEAD_;
     }
 
     public static final int TYPE_FIELD_NUMBER = 2;
@@ -425,29 +376,14 @@ public final class BasePacket {
     }
 
     public static final int BODYLENGTH_FIELD_NUMBER = 4;
-    private com.google.protobuf.Int32Value bodyLength_;
+    private int bodyLength_;
     /**
-     * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-     * @return Whether the bodyLength field is set.
-     */
-    @java.lang.Override
-    public boolean hasBodyLength() {
-      return bodyLength_ != null;
-    }
-    /**
-     * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
+     * <code>int32 bodyLength = 4;</code>
      * @return The bodyLength.
      */
     @java.lang.Override
-    public com.google.protobuf.Int32Value getBodyLength() {
-      return bodyLength_ == null ? com.google.protobuf.Int32Value.getDefaultInstance() : bodyLength_;
-    }
-    /**
-     * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-     */
-    @java.lang.Override
-    public com.google.protobuf.Int32ValueOrBuilder getBodyLengthOrBuilder() {
-      return getBodyLength();
+    public int getBodyLength() {
+      return bodyLength_;
     }
 
     public static final int PROTOCOL_FIELD_NUMBER = 5;
@@ -516,8 +452,8 @@ public final class BasePacket {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (hEAD_ != null) {
-        output.writeMessage(1, getHEAD());
+      if (hEAD_ != 0) {
+        output.writeInt32(1, hEAD_);
       }
       if (type_ != com.xxkun.client.msg.bean.BasePacket.Packet.Type.SERVER.getNumber()) {
         output.writeEnum(2, type_);
@@ -525,8 +461,8 @@ public final class BasePacket {
       if (protocolType_ != com.xxkun.client.msg.bean.Protocol.ProtocolType.NONE.getNumber()) {
         output.writeEnum(3, protocolType_);
       }
-      if (bodyLength_ != null) {
-        output.writeMessage(4, getBodyLength());
+      if (bodyLength_ != 0) {
+        output.writeInt32(4, bodyLength_);
       }
       if (protocol_ != null) {
         output.writeMessage(5, getProtocol());
@@ -543,9 +479,9 @@ public final class BasePacket {
       if (size != -1) return size;
 
       size = 0;
-      if (hEAD_ != null) {
+      if (hEAD_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getHEAD());
+          .computeInt32Size(1, hEAD_);
       }
       if (type_ != com.xxkun.client.msg.bean.BasePacket.Packet.Type.SERVER.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
@@ -555,9 +491,9 @@ public final class BasePacket {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, protocolType_);
       }
-      if (bodyLength_ != null) {
+      if (bodyLength_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getBodyLength());
+          .computeInt32Size(4, bodyLength_);
       }
       if (protocol_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -582,18 +518,12 @@ public final class BasePacket {
       }
       com.xxkun.client.msg.bean.BasePacket.Packet other = (com.xxkun.client.msg.bean.BasePacket.Packet) obj;
 
-      if (hasHEAD() != other.hasHEAD()) return false;
-      if (hasHEAD()) {
-        if (!getHEAD()
-            .equals(other.getHEAD())) return false;
-      }
+      if (getHEAD()
+          != other.getHEAD()) return false;
       if (type_ != other.type_) return false;
       if (protocolType_ != other.protocolType_) return false;
-      if (hasBodyLength() != other.hasBodyLength()) return false;
-      if (hasBodyLength()) {
-        if (!getBodyLength()
-            .equals(other.getBodyLength())) return false;
-      }
+      if (getBodyLength()
+          != other.getBodyLength()) return false;
       if (hasProtocol() != other.hasProtocol()) return false;
       if (hasProtocol()) {
         if (!getProtocol()
@@ -615,18 +545,14 @@ public final class BasePacket {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasHEAD()) {
-        hash = (37 * hash) + HEAD_FIELD_NUMBER;
-        hash = (53 * hash) + getHEAD().hashCode();
-      }
+      hash = (37 * hash) + HEAD_FIELD_NUMBER;
+      hash = (53 * hash) + getHEAD();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
       hash = (37 * hash) + PROTOCOL_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + protocolType_;
-      if (hasBodyLength()) {
-        hash = (37 * hash) + BODYLENGTH_FIELD_NUMBER;
-        hash = (53 * hash) + getBodyLength().hashCode();
-      }
+      hash = (37 * hash) + BODYLENGTH_FIELD_NUMBER;
+      hash = (53 * hash) + getBodyLength();
       if (hasProtocol()) {
         hash = (37 * hash) + PROTOCOL_FIELD_NUMBER;
         hash = (53 * hash) + getProtocol().hashCode();
@@ -768,22 +694,14 @@ public final class BasePacket {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (hEADBuilder_ == null) {
-          hEAD_ = null;
-        } else {
-          hEAD_ = null;
-          hEADBuilder_ = null;
-        }
+        hEAD_ = 0;
+
         type_ = 0;
 
         protocolType_ = 0;
 
-        if (bodyLengthBuilder_ == null) {
-          bodyLength_ = null;
-        } else {
-          bodyLength_ = null;
-          bodyLengthBuilder_ = null;
-        }
+        bodyLength_ = 0;
+
         if (protocolBuilder_ == null) {
           protocol_ = null;
         } else {
@@ -822,18 +740,10 @@ public final class BasePacket {
       @java.lang.Override
       public com.xxkun.client.msg.bean.BasePacket.Packet buildPartial() {
         com.xxkun.client.msg.bean.BasePacket.Packet result = new com.xxkun.client.msg.bean.BasePacket.Packet(this);
-        if (hEADBuilder_ == null) {
-          result.hEAD_ = hEAD_;
-        } else {
-          result.hEAD_ = hEADBuilder_.build();
-        }
+        result.hEAD_ = hEAD_;
         result.type_ = type_;
         result.protocolType_ = protocolType_;
-        if (bodyLengthBuilder_ == null) {
-          result.bodyLength_ = bodyLength_;
-        } else {
-          result.bodyLength_ = bodyLengthBuilder_.build();
-        }
+        result.bodyLength_ = bodyLength_;
         if (protocolBuilder_ == null) {
           result.protocol_ = protocol_;
         } else {
@@ -892,8 +802,8 @@ public final class BasePacket {
 
       public Builder mergeFrom(com.xxkun.client.msg.bean.BasePacket.Packet other) {
         if (other == com.xxkun.client.msg.bean.BasePacket.Packet.getDefaultInstance()) return this;
-        if (other.hasHEAD()) {
-          mergeHEAD(other.getHEAD());
+        if (other.getHEAD() != 0) {
+          setHEAD(other.getHEAD());
         }
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
@@ -901,8 +811,8 @@ public final class BasePacket {
         if (other.protocolType_ != 0) {
           setProtocolTypeValue(other.getProtocolTypeValue());
         }
-        if (other.hasBodyLength()) {
-          mergeBodyLength(other.getBodyLength());
+        if (other.getBodyLength() != 0) {
+          setBodyLength(other.getBodyLength());
         }
         if (other.hasProtocol()) {
           mergeProtocol(other.getProtocol());
@@ -939,123 +849,35 @@ public final class BasePacket {
         return this;
       }
 
-      private com.google.protobuf.Int32Value hEAD_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder> hEADBuilder_;
+      private int hEAD_ ;
       /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-       * @return Whether the hEAD field is set.
-       */
-      public boolean hasHEAD() {
-        return hEADBuilder_ != null || hEAD_ != null;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
+       * <code>int32 HEAD = 1;</code>
        * @return The hEAD.
        */
-      public com.google.protobuf.Int32Value getHEAD() {
-        if (hEADBuilder_ == null) {
-          return hEAD_ == null ? com.google.protobuf.Int32Value.getDefaultInstance() : hEAD_;
-        } else {
-          return hEADBuilder_.getMessage();
-        }
+      @java.lang.Override
+      public int getHEAD() {
+        return hEAD_;
       }
       /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
+       * <code>int32 HEAD = 1;</code>
+       * @param value The hEAD to set.
+       * @return This builder for chaining.
        */
-      public Builder setHEAD(com.google.protobuf.Int32Value value) {
-        if (hEADBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          hEAD_ = value;
-          onChanged();
-        } else {
-          hEADBuilder_.setMessage(value);
-        }
-
+      public Builder setHEAD(int value) {
+        
+        hEAD_ = value;
+        onChanged();
         return this;
       }
       /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-       */
-      public Builder setHEAD(
-          com.google.protobuf.Int32Value.Builder builderForValue) {
-        if (hEADBuilder_ == null) {
-          hEAD_ = builderForValue.build();
-          onChanged();
-        } else {
-          hEADBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-       */
-      public Builder mergeHEAD(com.google.protobuf.Int32Value value) {
-        if (hEADBuilder_ == null) {
-          if (hEAD_ != null) {
-            hEAD_ =
-              com.google.protobuf.Int32Value.newBuilder(hEAD_).mergeFrom(value).buildPartial();
-          } else {
-            hEAD_ = value;
-          }
-          onChanged();
-        } else {
-          hEADBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
+       * <code>int32 HEAD = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearHEAD() {
-        if (hEADBuilder_ == null) {
-          hEAD_ = null;
-          onChanged();
-        } else {
-          hEAD_ = null;
-          hEADBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-       */
-      public com.google.protobuf.Int32Value.Builder getHEADBuilder() {
         
+        hEAD_ = 0;
         onChanged();
-        return getHEADFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-       */
-      public com.google.protobuf.Int32ValueOrBuilder getHEADOrBuilder() {
-        if (hEADBuilder_ != null) {
-          return hEADBuilder_.getMessageOrBuilder();
-        } else {
-          return hEAD_ == null ?
-              com.google.protobuf.Int32Value.getDefaultInstance() : hEAD_;
-        }
-      }
-      /**
-       * <code>.google.protobuf.Int32Value HEAD = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder> 
-          getHEADFieldBuilder() {
-        if (hEADBuilder_ == null) {
-          hEADBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder>(
-                  getHEAD(),
-                  getParentForChildren(),
-                  isClean());
-          hEAD_ = null;
-        }
-        return hEADBuilder_;
+        return this;
       }
 
       private int type_ = 0;
@@ -1166,123 +988,35 @@ public final class BasePacket {
         return this;
       }
 
-      private com.google.protobuf.Int32Value bodyLength_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder> bodyLengthBuilder_;
+      private int bodyLength_ ;
       /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-       * @return Whether the bodyLength field is set.
-       */
-      public boolean hasBodyLength() {
-        return bodyLengthBuilder_ != null || bodyLength_ != null;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
+       * <code>int32 bodyLength = 4;</code>
        * @return The bodyLength.
        */
-      public com.google.protobuf.Int32Value getBodyLength() {
-        if (bodyLengthBuilder_ == null) {
-          return bodyLength_ == null ? com.google.protobuf.Int32Value.getDefaultInstance() : bodyLength_;
-        } else {
-          return bodyLengthBuilder_.getMessage();
-        }
+      @java.lang.Override
+      public int getBodyLength() {
+        return bodyLength_;
       }
       /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
+       * <code>int32 bodyLength = 4;</code>
+       * @param value The bodyLength to set.
+       * @return This builder for chaining.
        */
-      public Builder setBodyLength(com.google.protobuf.Int32Value value) {
-        if (bodyLengthBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          bodyLength_ = value;
-          onChanged();
-        } else {
-          bodyLengthBuilder_.setMessage(value);
-        }
-
+      public Builder setBodyLength(int value) {
+        
+        bodyLength_ = value;
+        onChanged();
         return this;
       }
       /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-       */
-      public Builder setBodyLength(
-          com.google.protobuf.Int32Value.Builder builderForValue) {
-        if (bodyLengthBuilder_ == null) {
-          bodyLength_ = builderForValue.build();
-          onChanged();
-        } else {
-          bodyLengthBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-       */
-      public Builder mergeBodyLength(com.google.protobuf.Int32Value value) {
-        if (bodyLengthBuilder_ == null) {
-          if (bodyLength_ != null) {
-            bodyLength_ =
-              com.google.protobuf.Int32Value.newBuilder(bodyLength_).mergeFrom(value).buildPartial();
-          } else {
-            bodyLength_ = value;
-          }
-          onChanged();
-        } else {
-          bodyLengthBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
+       * <code>int32 bodyLength = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearBodyLength() {
-        if (bodyLengthBuilder_ == null) {
-          bodyLength_ = null;
-          onChanged();
-        } else {
-          bodyLength_ = null;
-          bodyLengthBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-       */
-      public com.google.protobuf.Int32Value.Builder getBodyLengthBuilder() {
         
+        bodyLength_ = 0;
         onChanged();
-        return getBodyLengthFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-       */
-      public com.google.protobuf.Int32ValueOrBuilder getBodyLengthOrBuilder() {
-        if (bodyLengthBuilder_ != null) {
-          return bodyLengthBuilder_.getMessageOrBuilder();
-        } else {
-          return bodyLength_ == null ?
-              com.google.protobuf.Int32Value.getDefaultInstance() : bodyLength_;
-        }
-      }
-      /**
-       * <code>.google.protobuf.Int32Value bodyLength = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder> 
-          getBodyLengthFieldBuilder() {
-        if (bodyLengthBuilder_ == null) {
-          bodyLengthBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder>(
-                  getBodyLength(),
-                  getParentForChildren(),
-                  isClean());
-          bodyLength_ = null;
-        }
-        return bodyLengthBuilder_;
+        return this;
       }
 
       private com.google.protobuf.Any protocol_;
@@ -1591,23 +1325,20 @@ public final class BasePacket {
     java.lang.String[] descriptorData = {
       "\n%com/xxkun/client/msg/BasePacket.proto\022" +
       "\031com.xxkun.client.msg.bean\032\031google/proto" +
-      "buf/any.proto\032\036google/protobuf/wrappers." +
-      "proto\032#com/xxkun/client/msg/Protocol.pro" +
-      "to\"\320\002\n\006Packet\022)\n\004HEAD\030\001 \001(\0132\033.google.pro" +
-      "tobuf.Int32Value\0224\n\004type\030\002 \001(\0162&.com.xxk" +
-      "un.client.msg.bean.Packet.Type\022>\n\rprotoc" +
-      "ol_type\030\003 \001(\0162\'.com.xxkun.client.msg.bea" +
-      "n.ProtocolType\022/\n\nbodyLength\030\004 \001(\0132\033.goo" +
-      "gle.protobuf.Int32Value\022&\n\010protocol\030\005 \001(" +
-      "\0132\024.google.protobuf.Any\022\"\n\004body\030\006 \001(\0132\024." +
-      "google.protobuf.Any\"(\n\004Type\022\n\n\006SERVER\020\000\022" +
-      "\010\n\004PEER\020\001\022\n\n\006CUSTOM\020\002b\006proto3"
+      "buf/any.proto\032#com/xxkun/client/msg/Prot" +
+      "ocol.proto\"\226\002\n\006Packet\022\014\n\004HEAD\030\001 \001(\005\0224\n\004t" +
+      "ype\030\002 \001(\0162&.com.xxkun.client.msg.bean.Pa" +
+      "cket.Type\022>\n\rprotocol_type\030\003 \001(\0162\'.com.x" +
+      "xkun.client.msg.bean.ProtocolType\022\022\n\nbod" +
+      "yLength\030\004 \001(\005\022&\n\010protocol\030\005 \001(\0132\024.google" +
+      ".protobuf.Any\022\"\n\004body\030\006 \001(\0132\024.google.pro" +
+      "tobuf.Any\"(\n\004Type\022\n\n\006SERVER\020\000\022\010\n\004PEER\020\001\022" +
+      "\n\n\006CUSTOM\020\002b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
-          com.google.protobuf.WrappersProto.getDescriptor(),
           com.xxkun.client.msg.bean.Protocol.getDescriptor(),
         });
     internal_static_com_xxkun_client_msg_bean_Packet_descriptor =
@@ -1617,7 +1348,6 @@ public final class BasePacket {
         internal_static_com_xxkun_client_msg_bean_Packet_descriptor,
         new java.lang.String[] { "HEAD", "Type", "ProtocolType", "BodyLength", "Protocol", "Body", });
     com.google.protobuf.AnyProto.getDescriptor();
-    com.google.protobuf.WrappersProto.getDescriptor();
     com.xxkun.client.msg.bean.Protocol.getDescriptor();
   }
 
