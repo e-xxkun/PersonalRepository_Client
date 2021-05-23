@@ -1,5 +1,6 @@
 package com.xxkun.client.connection;
 
+import com.google.protobuf.Any;
 import com.xxkun.client.dao.Peer;
 import com.xxkun.client.pojo.request.BaseServerRequest;
 
@@ -32,7 +33,12 @@ public enum PeerConnectionPool {
         }
 
         @Override
-        public BaseServerRequest getHeartbeatRequest() {
+        public InetSocketAddress getInetSocketAddress() {
+            return null;
+        }
+
+        @Override
+        public Any getHeartbeatRequest() {
             return null;
         }
 

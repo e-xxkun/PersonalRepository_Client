@@ -9,7 +9,7 @@ public abstract class ProtocolHandler {
         return true;
     }
 
-    public static void sendBefor(BasePacket.Packet packet, InetSocketAddress socketAddress, BaseServer server) {
+    public static void sendBefor(BasePacket.Packet.Builder packet, InetSocketAddress socketAddress, BaseServer server) {
     }
 
     public static void sendAfter(BasePacket.Packet packet, InetSocketAddress socketAddress, BaseServer server) {

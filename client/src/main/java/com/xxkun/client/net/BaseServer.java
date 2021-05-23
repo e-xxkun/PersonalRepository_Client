@@ -1,5 +1,6 @@
 package com.xxkun.client.net;
 
+import com.google.protobuf.Any;
 import com.xxkun.client.connection.PeerConnectionPool;
 import com.xxkun.client.connection.ServerConnection;
 import com.xxkun.client.msg.bean.BasePacket.Packet;
@@ -27,10 +28,13 @@ class BaseServer {
 
     private OnExceptionPacketReceive onPacketReceive;
 
-    public void send(Packet packet, InetSocketAddress socketAddress) throws IOException {
+    public void send(Any body, InetSocketAddress socketAddress) throws IOException {
+        Packet.Builder builder = Packet.newBuilder();
+        builder.setBody(body);
+        ProtocolHandler.sendBefor(builder, socketAddress, this);
+        Packet packet = builder.build();
         byte[] data = packet.toByteArray();
         DatagramPacket datagramPacket = new DatagramPacket(data, data.length, socketAddress);
-        ProtocolHandler.sendBefor(packet, socketAddress, this);
         socket.send(datagramPacket);
         ProtocolHandler.sendAfter(packet, socketAddress, this);
     }

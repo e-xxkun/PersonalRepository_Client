@@ -1,7 +1,7 @@
 package com.xxkun.client.connection;
 
+import com.google.protobuf.Any;
 import com.xxkun.client.common.BaseThread;
-import com.xxkun.client.msg.bean.BasePacket;
 import com.xxkun.client.net.LocalServer;
 
 import java.net.InetSocketAddress;
@@ -59,7 +59,7 @@ public enum  HeartbeatKeeper {
     public interface Heartbeat extends Delayed {
         long getUserId();
         InetSocketAddress getInetSocketAddress();
-        BasePacket.Packet getHeartbeatRequest();
+        Any getHeartbeatRequest();
         void setStartDate(long time);
     }
 }

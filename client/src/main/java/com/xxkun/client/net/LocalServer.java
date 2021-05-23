@@ -33,9 +33,9 @@ public enum  LocalServer {
         responseListener.start();
     }
 
-    public void send(BasePacket.Packet packet, InetSocketAddress socketAddress) {
+    public void send(Any body, InetSocketAddress socketAddress) {
         try {
-            server.send(packet, socketAddress);
+            server.send(body, socketAddress);
             System.out.println("SEND: to " + socketAddress);
         } catch (IOException e) {
             e.printStackTrace();

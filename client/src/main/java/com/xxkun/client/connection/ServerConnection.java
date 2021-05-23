@@ -1,11 +1,10 @@
 package com.xxkun.client.connection;
 
+import com.google.protobuf.Any;
 import com.xxkun.client.common.PersonalInfo;
 import com.xxkun.client.common.ServerInfo;
-import com.xxkun.client.msg.bean.BasePacket;
 import com.xxkun.client.msg.bean.ServerRequest;
-import com.xxkun.client.pojo.request.ServerHeartbeatRequest;
-import com.xxkun.client.pojo.request.BaseServerRequest;
+import com.xxkun.client.net.request.server.ServerRequsetFactory;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Delayed;
@@ -37,11 +36,11 @@ public enum  ServerConnection {
 
         private final ServerInfo server;
         private long startTime;
-        private ServerRequest.HeartbeatMessage heartbeatMessage;
+        private ServerRequest.BaseServerRequest.Builder heartbeatRequest;
 
         ServerHeartbeat(ServerInfo server) {
             this.server = server;
-            heartbeatMessage = new ServerHeartbeatRequest(server.getSocketAddress());
+            heartbeatRequest = ServerRequsetFactory.getHeartbeatRequestBuilder();
         }
 
         @Override
@@ -51,13 +50,13 @@ public enum  ServerConnection {
 
         @Override
         public InetSocketAddress getInetSocketAddress() {
-            return null;
+            return server.getSocketAddress();
         }
 
         @Override
-        public BasePacket.Packet getHeartbeatRequest() {
-            heartbeatMessage.setToken(PersonalInfo.INSTANCE.getToken());
-            return heartbeatMessage;
+        public Any getHeartbeatRequest() {
+            heartbeatRequest.setToken(PersonalInfo.INSTANCE.getToken());
+            return Any.pack(heartbeatRequest.getMessage());
         }
 
         @Override
