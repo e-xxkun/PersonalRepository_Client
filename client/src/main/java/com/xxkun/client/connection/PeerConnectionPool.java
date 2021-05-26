@@ -2,7 +2,9 @@ package com.xxkun.client.connection;
 
 import com.google.protobuf.Any;
 import com.xxkun.client.dao.Peer;
-import com.xxkun.client.pojo.request.BaseServerRequest;
+import com.xxkun.client.msg.bean.PeerRequest;
+import com.xxkun.client.msg.bean.ServerRequest;
+import com.xxkun.client.net.request.PeerRequsetFactory;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Delayed;
@@ -17,14 +19,16 @@ public enum PeerConnectionPool {
         return true;
     }
 
-    class PeerHeartbeat implements HeartbeatKeeper.Heartbeat {
+    static class PeerHeartbeat implements HeartbeatKeeper.Heartbeat {
         private final static long HEARTBEAT_TIME = 5 * 1000;
 
         private Peer peer;
         private long startTime;
+        private PeerRequest.BasePeerRequest.Builder heartbeatRequest;
 
         public PeerHeartbeat(Peer peer) {
             this.peer = peer;
+            heartbeatRequest = PeerRequsetFactory.getHeartbeatRequestBuilder();
         }
 
         @Override
@@ -39,7 +43,7 @@ public enum PeerConnectionPool {
 
         @Override
         public Any getHeartbeatRequest() {
-            return null;
+            return Any.pack(heartbeatRequest.build());
         }
 
         @Override

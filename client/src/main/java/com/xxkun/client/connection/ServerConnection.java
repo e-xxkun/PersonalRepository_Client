@@ -4,7 +4,7 @@ import com.google.protobuf.Any;
 import com.xxkun.client.common.PersonalInfo;
 import com.xxkun.client.common.ServerInfo;
 import com.xxkun.client.msg.bean.ServerRequest;
-import com.xxkun.client.net.request.server.ServerRequsetFactory;
+import com.xxkun.client.net.request.ServerRequsetFactory;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Delayed;
@@ -31,7 +31,7 @@ public enum  ServerConnection {
         return true;
     }
 
-    class ServerHeartbeat implements HeartbeatKeeper.Heartbeat {
+    static class ServerHeartbeat implements HeartbeatKeeper.Heartbeat {
         private static final long HEARTBEAT_TIME = 10 * 1000;
 
         private final ServerInfo server;

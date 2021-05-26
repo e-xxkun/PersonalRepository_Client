@@ -1,4 +1,4 @@
-package com.xxkun.client.net.request.server;
+package com.xxkun.client.net.request;
 
 import com.xxkun.client.msg.bean.ServerRequest;
 
